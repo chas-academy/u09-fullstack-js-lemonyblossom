@@ -29,30 +29,28 @@ app.listen(PORT, () => {
 
 // REGISTER
 const bcrypt = require('bcryptjs');
-const User = require('./models/User'); // Importera användarmodellen
+const User = require('./models/User'); 
 
-// Registreringsroute
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // Kontrollera om användaren redan finns
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // Hasha lösenordet
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Skapa en ny användare
+    // Create User
     const newUser = new User({
       username,
       email,
       password: hashedPassword,
     });
 
-    // Spara användaren i databasen
+    // Save User
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -65,24 +63,22 @@ app.post('/register', async (req, res) => {
 //LOGIN
 const jwt = require('jsonwebtoken');
 
-// Inloggningsroute
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Kontrollera om användaren finns
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Jämför lösenordet
+    // match password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Generera JWT-token
+    // JWT-token
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });

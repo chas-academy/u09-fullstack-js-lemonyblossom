@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import './register.css';  // Import the CSS file
 
 const Register = () => {
    const [username, setUsername] = useState('');
@@ -17,18 +18,16 @@ const Register = () => {
        });
  
        console.log('User registered:', response.data);
-       
 
-    console.log('Registered Username:', username);
-    console.log('Registered Email:', email);
+       console.log('Registered Username:', username);
+       console.log('Registered Email:', email);
      } catch (error) {
        console.error('There was an error registering!', error);
-    
      }
    };
  
    return (
-     <div>
+     <div className="register-container">
        <h2>Register</h2>
        <form onSubmit={handleSubmit}>
          <div>
@@ -62,7 +61,6 @@ const Register = () => {
        </form>
      </div>
    );
- };
+};
  
- export default Register;
- 
+export default Register;

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './register.css';  // Import the CSS file
+import { Link } from 'react-router-dom'; //
+import './style.css'; 
 
 const Register = () => {
    const [username, setUsername] = useState('');
@@ -59,6 +60,7 @@ const Register = () => {
          </div>
          <button type="submit">Register</button>
        </form>
+       <p>Already registered? <Link to="/login">Login here</Link></p> {/* Link to login */}
      </div>
    );
 };

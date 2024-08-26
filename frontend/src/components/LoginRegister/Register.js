@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; //
+import { Link, useNavigate } from 'react-router-dom'; 
 import './style.css'; 
 
 const Register = () => {
    const [username, setUsername] = useState('');
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
- 
+   const navigate = useNavigate(); 
+
    const handleSubmit = async (e) => {
      e.preventDefault();
      
@@ -17,16 +18,25 @@ const Register = () => {
          email,
          password,
        });
- 
+
        console.log('User registered:', response.data);
 
-       console.log('Registered Username:', username);
-       console.log('Registered Email:', email);
+       // Check if token exists and save it to localStorage
+       if (response.data.token) {
+         localStorage.setItem('token', response.data.token); // Save token
+         console.log('Token saved:', response.data.token);
+
+         // Redirect user to protected route
+         navigate('/posts'); 
+       } else {
+         console.error('No token received');
+       }
+
      } catch (error) {
        console.error('There was an error registering!', error);
      }
    };
- 
+
    return (
      <div className="register-container">
        <h2>Register</h2>
@@ -60,9 +70,9 @@ const Register = () => {
          </div>
          <button type="submit">Register</button>
        </form>
-       <p>Already registered? <Link to="/login">Login here</Link></p> {/* Link to login */}
+       <p>Already registered? <Link to="/login">Login here</Link></p>
      </div>
    );
 };
- 
+
 export default Register;

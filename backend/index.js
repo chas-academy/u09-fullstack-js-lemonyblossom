@@ -2,24 +2,28 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('./models/User'); 
 
 dotenv.config();
 
 const app = express();
 
-
 app.use(express.json());
 app.use(cors());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
     console.log('Connected to MongoDB');
   })
   .catch((err) => {
     console.error('Error connecting to MongoDB:', err.message);
   });
- 
 
 const PORT = process.env.PORT || 5001;
 
@@ -28,11 +32,13 @@ app.listen(PORT, () => {
 });
 
 // REGISTER
-const bcrypt = require('bcryptjs');
-const User = require('./models/User'); 
-
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
+
+  // Basic validation
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
 
   try {
     const existingUser = await User.findOne({ email });
@@ -60,11 +66,14 @@ app.post('/register', async (req, res) => {
   }
 });
 
-//LOGIN
-const jwt = require('jsonwebtoken');
-
+// LOGIN
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
+  // Basic validation
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
 
   try {
     const user = await User.findOne({ email });
@@ -72,7 +81,7 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // match password
+    // Match password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });

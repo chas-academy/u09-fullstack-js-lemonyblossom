@@ -4,7 +4,8 @@ import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes';
 import './App.css';
 import Register from './components/LoginRegister/Register';
 import Login from './components/LoginRegister/Login';
-import Posts from './components/Posts/Posts'; 
+import Logs from './components/Logs/Logs'; 
+import LogForm from './components/Logs/LogForm';
 import Profile from './components/Profile/Profile';
 import logo from './logo.svg';  
 
@@ -20,7 +21,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoutes />}>
 
-          <Route path="/posts" element={<Posts />} /> 
+          <Route path="/logs" element={<Logs />} /> 
+          <Route path="/add-log" element={<LogForm />} />
           <Route path="/profile" element={<Profile />} />
           </Route>
 

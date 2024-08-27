@@ -25,7 +25,7 @@ const Login = () => {
         console.log('Token saved:', response.data.token);
 
         // Redirect to /logs page
-        navigate('/logs'); // Use navigate to redirect
+        navigate('/logs'); 
       } else {
         console.error('Login failed: No token received');
       }

@@ -32,7 +32,6 @@ app.listen(PORT, () => {
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
-  // 
   if (!username || !email || !password) {
     return res.status(400).json({ message: 'All fields are required' });
   }
@@ -53,13 +52,15 @@ app.post('/register', async (req, res) => {
       password: hashedPassword,
     });
 
-    // Save User
     await newUser.save();
 
-    // Generate JWT token, valid 7 days
-    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: '7d', 
-    });
+    const token = jwt.sign(
+      { userId: newUser._id, username: newUser.username }, 
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '7d', 
+      }
+    );
 
     res.status(201).json({ message: 'User registered successfully', token });
   } catch (error) {
@@ -90,7 +91,7 @@ app.post('/login', async (req, res) => {
     }
 
     // Generate JWT token, valid 7 days
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET, {
       expiresIn: '7d',
     });
 

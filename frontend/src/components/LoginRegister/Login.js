@@ -1,12 +1,12 @@
-// components/Login/Login.js
 import { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import './style.css';  
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +18,17 @@ const Login = () => {
       });
 
       console.log('User logged in:', response.data);
+
+      // Save the token to localStorage
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        console.log('Token saved:', response.data.token);
+
+        // Redirect to /posts page
+        navigate('/posts'); // Use navigate to redirect
+      } else {
+        console.error('Login failed: No token received');
+      }
     } catch (error) {
       console.error('There was an error logging in!', error);
     }

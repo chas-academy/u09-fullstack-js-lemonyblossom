@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes';
 import './App.css';
 import Register from './components/LoginRegister/Register';
 import Login from './components/LoginRegister/Login';
-import Posts from './components/Posts/Posts';  // Import the new Posts component
+import Posts from './components/Posts/Posts'; 
+import Profile from './components/Profile/Profile';
 import logo from './logo.svg';  
 
 function App() {
@@ -16,7 +18,12 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route element={<ProtectedRoutes />}>
+
           <Route path="/posts" element={<Posts />} /> 
+          <Route path="/profile" element={<Profile />} />
+          </Route>
+
           <Route path="/" element={<Login />} /> {/* Redirect to login as the default route */}
         </Routes>
       </div>

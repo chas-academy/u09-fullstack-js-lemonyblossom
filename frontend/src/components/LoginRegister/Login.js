@@ -24,8 +24,8 @@ const Login = () => {
         localStorage.setItem('token', response.data.token);
         console.log('Token saved:', response.data.token);
 
-        // Redirect to /posts page
-        navigate('/posts'); // Use navigate to redirect
+        // Redirect to /logs page
+        navigate('/logs'); // Use navigate to redirect
       } else {
         console.error('Login failed: No token received');
       }

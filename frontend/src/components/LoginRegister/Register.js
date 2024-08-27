@@ -27,7 +27,7 @@ const Register = () => {
          console.log('Token saved:', response.data.token);
 
          // Redirect user to their own feed
-         navigate('/posts'); 
+         navigate('/logs'); 
        } else {
          console.error('No token received');
        }

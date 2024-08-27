@@ -1,4 +1,4 @@
-.posts-container {
+.logs-container {
    text-align: center;
    padding: 20px;
 }
@@ -19,11 +19,11 @@
    background-color: #3e49b0;
 }
 
-.posts-list {
+.logs-list {
    margin-top: 20px;
 }
 
-.post-item {
+.logs-item {
    margin: 20px 0;
    padding: 10px;
    border: 1px solid #ddd;

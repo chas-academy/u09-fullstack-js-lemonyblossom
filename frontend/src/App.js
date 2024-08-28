@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes'; // Ensure this component is correctly implemented
+import { useEffect, useState } from 'react';
 import './App.css';
 import Register from './components/LoginRegister/Register';
 import Login from './components/LoginRegister/Login';
 import Logs from './components/Logs/Logs';
 import LogForm from './components/Logs/LogForm';
 import Profile from './components/Profile/Profile';
-import { useEffect, useState } from 'react';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <div className='Main'>
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -59,6 +61,9 @@ function App() {
           <Route path="/" element={isAuthenticated ? <Navigate to="/logs" /> : <Navigate to="/login" />} />
         </Routes>
       </div>
+      <Navbar />
+      </div>
+
     </Router>
   );
 }

@@ -9,7 +9,7 @@
 }
 
 /* Title of the form */
-.register-container h2 {
+.form-container h2 {
    color: white;
    /* Dark purple color */
    margin-bottom: 20px;
@@ -18,7 +18,7 @@
 }
 
 /* Labels for the input fields */
-.register-container label {
+.form-container label {
    display: block;
    margin-bottom: 10px;
    color: white;
@@ -28,9 +28,9 @@
 }
 
 /* Input fields styling */
-.register-container input[type="text"],
-.register-container input[type="email"],
-.register-container input[type="password"] {
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"] {
    width: calc(100% - 22px);
    padding: 10px;
    margin-bottom: 20px;
@@ -42,15 +42,15 @@
 }
 
 /* Focus state for input fields */
-.register-container input[type="text"]:focus,
-.register-container input[type="email"]:focus,
-.register-container input[type="password"]:focus {
+.form-container input[type="text"]:focus,
+.form-container input[type="email"]:focus,
+.form-container input[type="password"]:focus {
    border-color: rgb(210, 204, 255);
    outline: none;
 }
 
-/* Register button styling */
-.register-container button[type="submit"] {
+/* form button styling */
+.form-container button[type="submit"] {
    background-color: #a0a8ff;
    color: white;
    padding: 10px 20px;
@@ -63,12 +63,12 @@
 }
 
 /* Hover effect for the button */
-.register-container button[type="submit"]:hover {
+.form-container button[type="submit"]:hover {
    background-color: #3e49b0;
 }
 
 /* General form styling */
-.register-container form {
+.form-container form {
    display: flex;
    flex-direction: column;
    align-items: stretch;

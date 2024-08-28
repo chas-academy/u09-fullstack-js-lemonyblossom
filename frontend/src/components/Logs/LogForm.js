@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './logForm.css';
 
 const LogForm = ({ log, onSave, onCancel }) => {
-  const [mood, setMood] = useState(log ? log.mood : 3);  // Default mood value is 3 or existing log's mood
-  const [sleepHours, setSleepHours] = useState(log ? log.sleepHours : 8);  // Default sleep value is 8 or existing log's sleep hours
+  const [mood, setMood] = useState(log ? log.mood : 3);
+  const [sleepHours, setSleepHours] = useState(log ? log.sleepHours : 8);
   const [note, setNote] = useState(log ? log.note : '');
   const navigate = useNavigate();
 
@@ -23,25 +23,20 @@ const LogForm = ({ log, onSave, onCancel }) => {
 
     try {
       if (log) {
-        // Update existing log
-        const response = await axios.put(
+        const { data } = await axios.put(
           `http://localhost:5001/logs/${log._id}`,
           { mood, sleepHours, note },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        console.log('Log updated:', response.data);
-        onSave(response.data.log);  // Call onSave with the updated log
+        onSave(data.log);
       } else {
-        // Create new log
-        const response = await axios.post(
+        const { data } = await axios.post(
           'http://localhost:5001/logs',
           { mood, sleepHours, note },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        console.log('Log created:', response.data);
-        navigate('/logs');  // Redirect to logs page after logging
+        console.log('Log created:', data);
+        navigate('/logs');
       }
     } catch (error) {
       console.error('Error saving log:', error);

@@ -2,7 +2,6 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const Log = require('../models/Log'); 
 const router = express.Router();
-//TODO: Check if this files or index.js is responisble for expected database storage and crud for logs!
 
 // Middleware to check auth and extract userId from token
 const authenticate = (req, res, next) => {
@@ -43,7 +42,7 @@ router.post('/', authenticate, async (req, res) => {
 // GET LOGS FOR A USER
 router.get('/', authenticate, async (req, res) => {
   try {
-    const logs = await Log.dfind({ userId: req.userId }).sort({ createdAt: -1 });
+    const logs = await Log.find({ userId: req.userId }).sort({ createdAt: -1 });
     res.status(200).json(logs);
   } catch (error) {
     console.error('Error fetching logs:', error);

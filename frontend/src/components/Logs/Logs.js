@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
-import LogForm from './LogForm'; 
-import './logs.css';  
+import {jwtDecode} from 'jwt-decode'; // Ensure jwt-decode is installed
+import LogForm from './LogForm';
+import './logs.css';
 
 const Logs = () => {
   const [username, setUsername] = useState('');
   const [logs, setLogs] = useState([]);
-  const [editingLog, setEditingLog] = useState(null);  
+  const [editingLogId, setEditingLogId] = useState(null); // Track which log is being edited
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +20,6 @@ const Logs = () => {
       try {
         const decodedToken = jwtDecode(token);
         setUsername(decodedToken.username);
-
         axios.get('http://localhost:5001/logs', {
           headers: { Authorization: `Bearer ${token}` }
         }).then(response => {
@@ -28,7 +27,6 @@ const Logs = () => {
         }).catch(error => {
           console.error('Error fetching logs:', error);
         });
-
       } catch (error) {
         console.error('Error decoding token:', error);
         navigate('/login');
@@ -38,14 +36,11 @@ const Logs = () => {
 
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
-
     try {
       await axios.delete(`http://localhost:5001/logs/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-
-      console.log('Log deleted');
-      setLogs(logs.filter(log => log._id !== id));
+      setLogs(logs.filter(log => log._id !== id)); // Update the UI
     } catch (error) {
       console.error('Error deleting log:', error);
     }
@@ -53,38 +48,55 @@ const Logs = () => {
 
   const handleSave = (updatedLog) => {
     setLogs(logs.map(log => (log._id === updatedLog._id ? updatedLog : log)));
-    setEditingLog(null);  // Exit editing mode
+    setEditingLogId(null);  // Exit editing mode after saving
   };
+
+  const formatDate = (dateString) => {
+    const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
+  const formatTime = (dateString) => {
+    const options = { hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleTimeString('en-US', options);
+  };
+
+  const groupedLogs = logs.reduce((acc, log) => {
+    const logDate = formatDate(log.createdAt);
+    if (!acc[logDate]) acc[logDate] = [];
+    acc[logDate].push(log);
+    return acc;
+  }, {});
 
   return (
     <div className="logs-container">
-      <h2>Welcome, {username}!</h2>
-      <h1>Your Logs</h1>
-      <p>Here you can find all your logs.</p>
-
-      {/* Button to add a new log */}
-      <Link to="/add-log" className="btn btn-primary">Create New Log</Link>
-
-      {/* Display logs */}
+      <div className="welcome-message">Welcome, {username}!</div>
+ 
+      <Link to="/add-log" className="btn btn-primary">+</Link>
       <div className="logs-list">
-        {logs.map(log => (
-          <div key={log._id} className="log-item">
-            {editingLog === log._id ? (
-              <LogForm
-                log={log}
-                onSave={handleSave}
-                onCancel={() => setEditingLog(null)}
-              />
-            ) : (
-              <div>
-                <h3>Mood: {log.mood} / 5</h3>
-                <p>Sleep: {log.sleepHours} hours</p>
-                <p>Note: {log.note}</p>
-                <p>Date: {new Date(log.createdAt).toLocaleDateString()}</p>
-                <button onClick={() => setEditingLog(log._id)}>Edit</button>
-                <button onClick={() => handleDelete(log._id)}>Delete</button>
+        {Object.keys(groupedLogs).map(date => (
+          <div key={date}>
+            <h3 className="log-date-header">{date}</h3>
+            {groupedLogs[date].map(log => (
+              <div key={log._id} className="log-item">
+                {editingLogId === log._id ? (
+                  <LogForm
+                    log={log}
+                    onSave={handleSave}
+                    onCancel={() => setEditingLogId(null)}
+                  />
+                ) : (
+                  <div>
+                    <p><strong>Time:</strong> {formatTime(log.createdAt)}</p>
+                    <p><strong>Mood:</strong> {log.mood} / 5</p>
+                    <p><strong>Sleep:</strong> {log.sleepHours} hours</p>
+                    <p><strong>Note:</strong> {log.note}</p>
+                    <button onClick={() => setEditingLogId(log._id)}>Edit</button>
+                    <button onClick={() => handleDelete(log._id)}>Delete</button>
+                  </div>
+                )}
               </div>
-            )}
+            ))}
           </div>
         ))}
       </div>

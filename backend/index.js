@@ -5,6 +5,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User'); 
+const logRoutes = require ('./routes/logRoutes');
 const Log = require('./models/Log');
 
 dotenv.config();
@@ -28,6 +29,7 @@ const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 // REGISTER
 app.post('/register', async (req, res) => {
@@ -103,53 +105,5 @@ app.post('/login', async (req, res) => {
   }
 });
 
-
-// CREATE LOG
-app.post('/logs', async (req, res) => {
-  const { mood, sleepHours, note } = req.body;
-  const token = req.headers.authorization?.split(' ')[1];  // Get token from headers
-
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.userId;
-
-    const newLog = new Log({
-      mood,
-      sleepHours,
-      note,
-      userId
-    });
-
-    await newLog.save();
-
-    res.status(201).json({ message: 'Log created successfully', log: newLog });
-  } catch (error) {
-    console.error('Error creating log:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// GET LOGS FOR A USER
-app.get('/logs', async (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];  // Get token from headers
-
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.userId;
-
-    const logs = await Log.find({ userId }).sort({ createdAt: -1 });  // Fetch logs sorted by newest first
-
-    res.status(200).json(logs);
-  } catch (error) {
-    console.error('Error fetching logs:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+// Use log routes for /logs endpoints
+app.use('/logs', logRoutes);

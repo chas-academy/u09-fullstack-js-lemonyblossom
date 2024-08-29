@@ -9,11 +9,11 @@ const Navbar = () => {
       <Link to="/logs" className={location.pathname === '/logs' ? 'active' : ''}>
         Logs
       </Link>
-      <Link to="/history" className={location.pathname === '/history' ? 'active' : ''}>
-        History
+      <Link to="/stats" className={location.pathname === '/stats' ? 'active' : ''}>
+        Stats
       </Link>
       <Link to="/add-log" className={location.pathname === '/add-log' ? 'active' : ''}>
-        Add Log
+        Log
       </Link>
       <Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>
         Profile

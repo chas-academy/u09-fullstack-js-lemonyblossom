@@ -87,4 +87,25 @@ router.delete('/:id', authenticate, async (req, res) => {
   }
 });
 
+
+// AGGREGATE LOGS BY DAY
+router.get('/stats', async (req, res) => {
+  try {
+    const logs = await Log.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+          moodAvg: { $avg: '$mood' },
+          sleepAvg: { $avg: '$sleepHours' },
+        },
+      },
+      { $sort: { _id: 1 } } // Sort by date
+    ]);
+
+    res.json(logs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;

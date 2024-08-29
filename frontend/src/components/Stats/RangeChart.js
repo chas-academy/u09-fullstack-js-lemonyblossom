@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import 'chartjs-adapter-date-fns';
 import { Line } from 'react-chartjs-2';
+import 'chartjs-adapter-date-fns';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,6 +11,8 @@ import {
   Title,
   Tooltip,
   Legend,
+  TimeScale,
+  Filler,
 } from 'chart.js';
 
 ChartJS.register(
@@ -20,10 +22,12 @@ ChartJS.register(
   PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  TimeScale,
+  Filler
 );
 
-const LogChart = () => {
+const RangeChart = () => {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
 
@@ -56,40 +60,37 @@ const LogChart = () => {
 
     const groupedByDate = data.reduce((acc, log) => {
       const date = new Date(log.createdAt).toLocaleDateString();
-      if (!acc[date]) acc[date] = { mood: [], sleep: [] };
-      acc[date].mood.push(log.mood);
-      acc[date].sleep.push(log.sleepHours);
+      if (!acc[date]) acc[date] = { minMood: log.mood, maxMood: log.mood };
+      else {
+        acc[date].minMood = Math.min(acc[date].minMood, log.mood);
+        acc[date].maxMood = Math.max(acc[date].maxMood, log.mood);
+      }
       return acc;
     }, {});
 
-    const labels = Object.keys(groupedByDate).sort((a, b) => new Date(a) - new Date(b));
-    const moodData = labels.map(date =>
-      groupedByDate[date].mood.reduce((a, b) => a + b, 0) / groupedByDate[date].mood.length
-    );
-    const sleepData = labels.map(date =>
-      groupedByDate[date].sleep.reduce((a, b) => a + b, 0) / groupedByDate[date].sleep.length
-    );
+    const labels = Object.keys(groupedByDate).sort();
+    const minMoodData = labels.map(date => groupedByDate[date].minMood);
+    const maxMoodData = labels.map(date => groupedByDate[date].maxMood);
 
     return {
       labels,
       datasets: [
         {
-          label: 'Mood',
-          data: moodData,
-          borderColor: 'purple',
+          label: 'Mood Range',
+          data: minMoodData,
+          borderColor: 'rgba(75, 192, 192, 1)',
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          yAxisID: 'y1',
-          borderWidth: 1,
-          pointRadius: 4,
+          fill: 'origin',
+          borderWidth: 2,
+          pointRadius: 0,
         },
         {
-          label: 'Sleep Hours',
-          data: sleepData,
-          borderColor: 'lime',
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          yAxisID: 'y2',
-          borderWidth: 1,
-          pointRadius: 4,
+          label: '',
+          data: maxMoodData,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          fill: '-1',
+          borderWidth: 2,
+          pointRadius: 0,
         },
       ],
     };
@@ -99,55 +100,42 @@ const LogChart = () => {
 
   return (
     <div>
-      <h2>Sleep and Mood Data</h2>
+      <h2>Mood Range Data</h2>
       <Line
-        ref={chartRef}
+        ref={chartRef} // Attach chartRef to the chart instance
         data={chartData}
         options={{
           scales: {
             x: {
-              type: 'category',
+              type: 'time',
+              time: {
+                unit: 'day',
+                tooltipFormat: 'MMM d, yyyy',
+              },
               title: {
                 display: true,
                 text: 'Date',
               },
             },
-            y1: {
+            y: {
               type: 'linear',
               position: 'left',
               title: {
                 display: true,
                 text: 'Mood (1-5)',
               },
-            },
-            y2: {
-              type: 'linear',
-              position: 'right',
-              title: {
-                display: true,
-                text: 'Sleep Hours',
-              },
-              grid: {
-                drawOnChartArea: false,
-              },
+              suggestedMin: 1,
+              suggestedMax: 5,
             },
           },
           plugins: {
             legend: {
-              display: true,
-              position: 'top',
+              display: false,
             },
             tooltip: {
               callbacks: {
                 label: function (context) {
-                  let label = context.dataset.label || '';
-                  if (label) {
-                    label += ': ';
-                  }
-                  if (context.parsed.y !== null) {
-                    label += context.parsed.y.toFixed(2);
-                  }
-                  return label;
+                  return `Mood: ${context.raw}`;
                 },
               },
             },
@@ -158,4 +146,4 @@ const LogChart = () => {
   );
 };
 
-export default LogChart;
+export default RangeChart;

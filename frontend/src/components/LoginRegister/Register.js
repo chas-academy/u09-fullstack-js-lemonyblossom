@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'; 
 import './style.css'; 
 
+
 const Register = () => {
    const [username, setUsername] = useState('');
    const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const Register = () => {
      e.preventDefault();
      
      try {
-       const response = await axios.post('http://localhost:5001/register', {
+       const response = await axios.post('http://localhost:5001/users/register', {
          username,
          email,
          password,

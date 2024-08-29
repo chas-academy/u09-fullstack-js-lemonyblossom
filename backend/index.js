@@ -5,6 +5,7 @@ const cors = require('cors');
 const User = require('./models/User'); 
 const logRoutes = require('./routes/logRoutes');
 const userRoutes = require('./routes/userRoutes');
+const jwt = require('jsonwebtoken')
 
 dotenv.config();
 

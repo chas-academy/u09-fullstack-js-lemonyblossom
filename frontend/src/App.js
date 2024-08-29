@@ -8,6 +8,7 @@ import Logs from './components/Logs/Logs';
 import LogForm from './components/Logs/LogForm';
 import Profile from './components/Profile/Profile';
 import Navbar from './components/Navbar/Navbar';
+import Stats from './components/Stats/Stats';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -56,6 +57,7 @@ function App() {
             <Route path="/logs" element={<Logs />} />
             <Route path="/add-log" element={<LogForm />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/stats" element={<Stats />} />
           </Route>
           {/* Redirect based on authentication status */}
           <Route path="/" element={isAuthenticated ? <Navigate to="/logs" /> : <Navigate to="/login" />} />

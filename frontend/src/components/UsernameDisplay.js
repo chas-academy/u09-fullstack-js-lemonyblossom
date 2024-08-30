@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode }from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Ensure the correct import for jwtDecode
 
 const UsernameDisplay = () => {
   const [username, setUsername] = useState('');
@@ -14,7 +14,10 @@ const UsernameDisplay = () => {
     } else {
       try {
         const decodedToken = jwtDecode(token);
-        setUsername(decodedToken.username);
+        const username = decodedToken.username;
+        // Capitalize the first letter of the username
+        const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1);
+        setUsername(capitalizedUsername);
       } catch (error) {
         console.error('Error decoding token:', error);
         navigate('/login');
@@ -23,7 +26,7 @@ const UsernameDisplay = () => {
   }, [navigate]);
 
   return (
-    <div className="welcome-message">Welcome, {username}!</div>
+    <div className="welcome-message">Hello, {username}!</div>
   );
 };
 

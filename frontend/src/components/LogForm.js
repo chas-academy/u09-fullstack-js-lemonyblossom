@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './logForm.css';
+import '../styles/form.css';
 
 const LogForm = ({ log, onSave, onCancel }) => {
   const [mood, setMood] = useState(log ? log.mood : 3);
@@ -44,7 +44,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
   };
 
   return (
-    <div className="log-form-container">
+    <div className="form-container">
       <h2>{log ? 'Edit Log' : 'Add a New Log'}</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -75,7 +75,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
             onChange={(e) => setNote(e.target.value)}
           />
         </div>
-        <button type="submit">{log ? 'Update Log' : 'Add Log'}</button>
+        <button type="submit">{log ? 'Done' : 'Add Log'}</button>
         {onCancel && <button type="button" onClick={onCancel}>Cancel</button>}
       </form>
     </div>

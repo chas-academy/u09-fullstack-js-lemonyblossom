@@ -4,18 +4,17 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: center;
 
 
 
 }
 
-.Main {
-  height: 90%;
+.page-container {
+  height: 88vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
   overflow-y: auto;
+
 }
 
 .App-logo {

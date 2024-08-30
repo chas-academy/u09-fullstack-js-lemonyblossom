@@ -2,13 +2,13 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes'; // Ensure this component is correctly implemented
 import { useEffect, useState } from 'react';
 import './App.css';
-import Register from './components/LoginRegister/Register';
-import Login from './components/LoginRegister/Login';
-import Logs from './components/Logs/Logs';
-import LogForm from './components/Logs/LogForm';
-import Profile from './components/Profile/Profile';
-import Navbar from './components/Navbar/Navbar';
-import Stats from './components/Stats/Stats';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Logs from './pages/Logs';
+import LogForm from './components/LogForm';
+import Profile from './pages/Profile';
+import Navbar from './components/Navbar';
+import Stats from './pages/Stats';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -49,10 +49,12 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <div className='Main'>
         <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      </Routes>
+        <div className='page-container'>
+        <Routes>
           <Route element={<ProtectedRoutes />}>
             <Route path="/logs" element={<Logs />} />
             <Route path="/add-log" element={<LogForm />} />
@@ -65,7 +67,6 @@ function App() {
       </div>
       <Navbar />
       </div>
-
     </Router>
   );
 }

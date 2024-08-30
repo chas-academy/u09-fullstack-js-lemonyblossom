@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode'; // Ensure jwt-decode is installed
-import LogForm from './LogForm';
-import './logs.css';
+import LogForm from '../components/LogForm';
+import '../styles/logs.css';
 
 const Logs = () => {
   const [username, setUsername] = useState('');
@@ -69,10 +69,10 @@ const Logs = () => {
   }, {});
 
   return (
-    <div className="logs-container">
-      <div className="welcome-message">Welcome, {username}!</div>
- 
-      <Link to="/add-log" className="btn btn-primary">+</Link>
+    <>
+          <div className="welcome-message">Welcome, {username}!</div>
+
+    <div className="logs-container"> 
       <div className="logs-list">
         {Object.keys(groupedLogs).map(date => (
           <div key={date}>
@@ -101,6 +101,7 @@ const Logs = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

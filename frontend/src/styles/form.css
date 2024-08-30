@@ -1,6 +1,11 @@
 /* Container for the Register form */
 .form-container {
-   max-width: 400px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   color: white;
+   max-width: 600px;
    margin: 50px auto;
    padding: 20px;
    /*    background: linear-gradient(180deg, #f6cd9e 0%, #f6b89e 50%, #eba5dc 100%);
@@ -9,13 +14,20 @@
    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.change-password-form {
+   width: 100%;
+   background-color: #00000013;
+   border: 2px solid #ffffffbb;
+   padding: 10px;
+   border-radius: 5px;
+}
+
 /* Title of the form */
 .form-container h2 {
    color: white;
-   /* Dark purple color */
    margin-bottom: 20px;
-   font-size: 1.8rem;
-   text-align: center;
+   font-size: 1.6rem;
+   text-align: left;
 }
 
 /* Labels for the input fields */
@@ -54,7 +66,8 @@
 }
 
 /* form button styling */
-.form-container button[type="submit"] {
+.form-container button[type="submit"],
+.logout-button {
    background-color: #a0a8ff;
    color: white;
    padding: 10px 20px;
@@ -64,6 +77,11 @@
    font-size: 1.2rem;
    width: 100%;
    transition: background-color 0.3s;
+   margin-bottom: 15px;
+}
+
+.logout-button {
+   margin-top: 40px;
 }
 
 /* Hover effect for the button */

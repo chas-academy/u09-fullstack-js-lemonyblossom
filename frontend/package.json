@@ -20,8 +20,9 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": " vite build",
+    "preview": "vite preview",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/logo.svg"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "vite-plugin-pwa": "^0.20.5"
   }
 }

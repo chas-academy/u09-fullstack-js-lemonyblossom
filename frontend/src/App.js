@@ -9,6 +9,7 @@ import LogForm from './components/LogForm';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import Stats from './pages/Stats';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -52,21 +53,22 @@ function App() {
         <Routes>
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      </Routes>
-        <div className='page-container'>
-        <Routes>
+  
+  
           <Route element={<ProtectedRoutes />}>
             <Route path="/logs" element={<Logs />} />
             <Route path="/add-log" element={<LogForm />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/stats" element={<Stats />} />
           </Route>
-          {/* Redirect based on authentication status */}
+          <Route element={<ProtectedRoutes requiredRole="admin" />}>
+  <Route path="/admin-dashboard" element={<AdminDashboard />} />
+</Route>
           <Route path="/" element={isAuthenticated ? <Navigate to="/logs" /> : <Navigate to="/login" />} />
         </Routes>
       </div>
       <Navbar />
-      </div>
+   
     </Router>
   );
 }

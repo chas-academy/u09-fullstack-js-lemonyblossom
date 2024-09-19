@@ -22,12 +22,10 @@ const Register = () => {
 
        console.log('User registered:', response.data);
 
-       // Check token and save to localStorage
        if (response.data.token) {
          localStorage.setItem('token', response.data.token); 
          console.log('Token saved:', response.data.token);
 
-         // Redirect user to their own feed
          navigate('/logs'); 
        } else {
          console.error('No token received');

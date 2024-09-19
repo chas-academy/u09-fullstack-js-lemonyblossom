@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     required: true, 
     unique: true, 
     trim: true,  
-    minlength: 3 // Min length username
+    minlength: 5
   },
   email: { 
     type: String, 
@@ -14,12 +14,17 @@ const userSchema = new mongoose.Schema({
     unique: true, 
     trim: true, 
     lowercase: true, 
-    match: [/.+@.+\..+/, 'Invalid email address'] // verifiera e-postformat
+    match: [/.+@.+\..+/, 'Invalid email address'] 
   },
   password: { 
     type: String, 
     required: true, 
     minlength: 6 
+  },
+  role: { 
+    type: String, 
+    enum: ['user', 'admin'],
+    default: 'user'
   }
 }, {
   timestamps: true 

@@ -5,6 +5,8 @@ const cors = require('cors');
 const User = require('./models/User'); 
 const logRoutes = require('./routes/logRoutes');
 const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+
 const jwt = require('jsonwebtoken')
 
 dotenv.config();
@@ -43,6 +45,8 @@ app.get('/verifyToken', (req, res) => {
 // Use routes
 app.use('/users', userRoutes);
 app.use('/logs', logRoutes);
+app.use('/admin', adminRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

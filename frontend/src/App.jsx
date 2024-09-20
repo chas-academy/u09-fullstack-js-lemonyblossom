@@ -44,17 +44,17 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
     <Router>
       <div className="App">
         <Routes>
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-  
-  
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+
+
           <Route element={<ProtectedRoutes />}>
             <Route path="/logs" element={<Logs />} />
             <Route path="/add-log" element={<LogForm />} />
@@ -62,13 +62,13 @@ function App() {
             <Route path="/stats" element={<Stats />} />
           </Route>
           <Route element={<ProtectedRoutes requiredRole="admin" />}>
-  <Route path="/admin-dashboard" element={<AdminDashboard />} />
-</Route>
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          </Route>
           <Route path="/" element={isAuthenticated ? <Navigate to="/logs" /> : <Navigate to="/login" />} />
         </Routes>
       </div>
       <Navbar />
-   
+
     </Router>
   );
 }

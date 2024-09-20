@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Ensure the correct import for jwtDecode
+import { jwtDecode } from 'jwt-decode'; // Ensure the correct import for jwtDecode
 
 const UsernameDisplay = () => {
   const [username, setUsername] = useState('');

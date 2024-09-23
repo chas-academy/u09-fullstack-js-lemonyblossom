@@ -99,49 +99,52 @@ const RangeChart = () => {
   const chartData = prepareData();
 
   return (
-    <div>
-      <h2>Mood Range Data</h2>
-      <Line
-        ref={chartRef} // Attach chartRef to the chart instance
-        data={chartData}
-        options={{
-          scales: {
-            x: {
-              type: 'time',
-              time: {
-                unit: 'day',
-                tooltipFormat: 'MMM d, yyyy',
+    <div className="chart-wrapper">
+      <div className="chart-container">
+        <h2>Mood Range Data</h2>
+        <Line
+          ref={chartRef}
+          data={chartData}
+          options={{
+            scales: {
+              x: {
+                type: 'category',
+                title: {
+                  display: true,
+                  text: 'Date',
+                },
               },
-              title: {
-                display: true,
-                text: 'Date',
-              },
-            },
-            y: {
-              type: 'linear',
-              position: 'left',
-              title: {
-                display: true,
-                text: 'Mood (1-5)',
-              },
-              suggestedMin: 1,
-              suggestedMax: 5,
-            },
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-            tooltip: {
-              callbacks: {
-                label: function (context) {
-                  return `Mood: ${context.raw}`;
+              y: {
+                type: 'linear',
+                title: {
+                  display: true,
+                  text: 'Mood (1-5)',
                 },
               },
             },
-          },
-        }}
-      />
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                      label += context.parsed.y.toFixed(2);
+                    }
+                    return label;
+                  },
+                },
+              },
+            },
+          }}
+        />
+      </div>
     </div>
   );
 };

@@ -76,37 +76,40 @@ const MoodCounterChart = () => {
   };
 
   return (
-    <div>
-      <h2>Mood Count for the Current Month</h2>
-      <Doughnut
-        data={chartData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: true, // Change this to true if you don't want to change the aspect ratio
-          aspectRatio: 2, // Adjust this value to control the height-to-width ratio
-          rotation: -90, // For half doughnut
-          circumference: 180, // For half doughnut
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            tooltip: {
-              callbacks: {
-                label: function (context) {
-                  let label = context.label || '';
-                  if (label) {
-                    label += ': ';
-                  }
-                  if (context.raw !== null) {
-                    label += context.raw;
-                  }
-                  return label;
+    <div className="chart-wrapper">
+      <div className="chart-container">
+        <h2>Mood Count for the Current Month</h2>
+        <Doughnut
+          data={chartData}
+          options={{
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 2,
+            rotation: -90,
+            circumference: 180,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    let label = context.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.raw !== null) {
+                      label += context.raw;
+                    }
+                    return label;
+                  },
                 },
               },
             },
-          },
-        }}
-      />    </div>
+          }}
+        />
+      </div>
+    </div>
   );
 };
 

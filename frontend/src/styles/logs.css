@@ -1,6 +1,5 @@
 .logs-container {
-   width: 100%;
-   padding: 1rem;
+   width: 100vw;
    height: 100%;
    border-radius: 15px;
 }
@@ -9,8 +8,8 @@
    position: absolute;
    top: 20px;
    left: 20px;
-   font-size: 2rem;
-   color: #4e59e0;
+   font-size: 1.3em;
+   color: #8465ff;
    font-weight: bold;
 }
 
@@ -47,6 +46,7 @@
    text-align: left;
    position: relative;
    margin-bottom: 5px;
+   max-width: 100%;
 }
 
 .log-item h3 {

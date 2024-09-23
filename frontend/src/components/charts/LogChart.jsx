@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import 'chartjs-adapter-date-fns';
 import { Line } from 'react-chartjs-2';
+import '../../styles/charts.css';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -98,62 +99,64 @@ const LogChart = () => {
   const chartData = prepareData();
 
   return (
-    <div>
-      <h2>Sleep and Mood Data</h2>
-      <Line
-        ref={chartRef}
-        data={chartData}
-        options={{
-          scales: {
-            x: {
-              type: 'category',
-              title: {
-                display: true,
-                text: 'Date',
+    <div className="chart-wrapper">
+      <div className="chart-container">
+        <h2>Sleep and Mood Data</h2>
+        <Line
+          ref={chartRef}
+          data={chartData}
+          options={{
+            scales: {
+              x: {
+                type: 'category',
+                title: {
+                  display: true,
+                  text: 'Date',
+                },
               },
-            },
-            y1: {
-              type: 'linear',
-              position: 'left',
-              title: {
-                display: true,
-                text: 'Mood (1-5)',
+              y1: {
+                type: 'linear',
+                position: 'left',
+                title: {
+                  display: true,
+                  text: 'Mood (1-5)',
+                },
               },
-            },
-            y2: {
-              type: 'linear',
-              position: 'right',
-              title: {
-                display: true,
-                text: 'Sleep Hours',
-              },
-              grid: {
-                drawOnChartArea: false,
-              },
-            },
-          },
-          plugins: {
-            legend: {
-              display: true,
-              position: 'top',
-            },
-            tooltip: {
-              callbacks: {
-                label: function (context) {
-                  let label = context.dataset.label || '';
-                  if (label) {
-                    label += ': ';
-                  }
-                  if (context.parsed.y !== null) {
-                    label += context.parsed.y.toFixed(2);
-                  }
-                  return label;
+              y2: {
+                type: 'linear',
+                position: 'right',
+                title: {
+                  display: true,
+                  text: 'Sleep Hours',
+                },
+                grid: {
+                  drawOnChartArea: false,
                 },
               },
             },
-          },
-        }}
-      />
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                      label += context.parsed.y.toFixed(2);
+                    }
+                    return label;
+                  },
+                },
+              },
+            },
+          }}
+        />
+      </div>
     </div>
   );
 };

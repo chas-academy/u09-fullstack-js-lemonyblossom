@@ -6,6 +6,7 @@ const User = require('./models/User');
 const logRoutes = require('./routes/logRoutes');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const resetPasswordRoutes = require('./routes/resetPasswordRoutes');
 
 const jwt = require('jsonwebtoken')
 
@@ -46,6 +47,7 @@ app.get('/verifyToken', (req, res) => {
 app.use('/users', userRoutes);
 app.use('/logs', logRoutes);
 app.use('/admin', adminRoutes);
+app.use('/password', resetPasswordRoutes);
 
 
 app.listen(PORT, () => {

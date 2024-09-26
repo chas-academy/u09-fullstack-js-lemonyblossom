@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../styles/form.css';
 import UsernameDisplay from '../components/UsernameDisplay';
 
-const Profile = () => {
+const Profile = ({ setIsAuthenticated }) => {
   const [profileData, setProfileData] = useState({});
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -17,6 +17,7 @@ const Profile = () => {
     const fetchProfileData = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
+        setIsAuthenticated(false);
         navigate('/login');
       } else {
         try {
@@ -26,33 +27,35 @@ const Profile = () => {
           setProfileData(response.data);
         } catch (error) {
           console.error('Error fetching profile data:', error);
+          setIsAuthenticated(false);
           navigate('/login'); // Redirect to login if there's an error
         }
       }
     };
 
     fetchProfileData();
-  }, [navigate]);
+  }, [navigate, setIsAuthenticated]);
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
       const response = await axios.post(
-        'http://localhost:5001/users/change-password', // Ensure this matches your backend route
+        'http://localhost:5001/users/change-password',
         { currentPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setPasswordChangeMessage(response.data.message);
-      console.log('Password change successful:', response.data);  // Log success response
+      console.log('Password change successful:', response.data);
     } catch (error) {
       setPasswordChangeMessage(error.response?.data?.message || 'Error changing password');
-      console.error('Error changing password:', error);  // Log error details
+      console.error('Error changing password:', error);
     }
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    setIsAuthenticated(false);
     navigate('/login');
   };
 
@@ -62,9 +65,9 @@ const Profile = () => {
       <div className="form-container profile-container">
         <h2>Profile</h2>
         <div className='user-info'>
-        <p><strong>Username:</strong> {profileData.username}</p>
-        <p><strong>Email:</strong> {profileData.email}</p>
-        <p><strong>Signed up:</strong> {new Date(profileData.createdAt).toLocaleDateString()}</p>
+          <p><strong>Username:</strong> {profileData.username}</p>
+          <p><strong>Email:</strong> {profileData.email}</p>
+          <p><strong>Signed up:</strong> {new Date(profileData.createdAt).toLocaleDateString()}</p>
         </div>
         <form className="change-password-form" onSubmit={handlePasswordChange}>
           <h3>Change Password</h3>
@@ -104,7 +107,7 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          <button className="change-password" type="submit">Change it!</button>
+          <button className="change-password-btn" type="submit">Change it!</button>
           {passwordChangeMessage && <p>{passwordChangeMessage}</p>}
         </form>
 

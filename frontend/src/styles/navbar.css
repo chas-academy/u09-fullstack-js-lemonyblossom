@@ -10,20 +10,21 @@
    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
    padding: 10px 0;
    box-sizing: border-box;
-   background-color: hsl(234, 36%, 79%);
+   background-color: #492a58;
 }
 
 .navbar a {
-   color: white;
+   color: rgba(255, 255, 255, 0.85);
    text-decoration: none;
    font-size: 1rem;
    font-weight: bold;
 }
 
 .navbar a.active {
-   color: #3e49b0;
+   color: #ffffff;
 }
 
 .navbar a:hover {
-   color: #eba5dc;
+   color: #ffd9f7;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }

@@ -7,6 +7,7 @@ const logRoutes = require('./routes/logRoutes');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const resetPasswordRoutes = require('./routes/resetPasswordRoutes');
+const toolsRouter = require('./routes/toolsRouter'); 
 
 const jwt = require('jsonwebtoken')
 
@@ -48,6 +49,7 @@ app.use('/users', userRoutes);
 app.use('/logs', logRoutes);
 app.use('/admin', adminRoutes);
 app.use('/password', resetPasswordRoutes);
+app.use('/tools', toolsRouter);
 
 
 app.listen(PORT, () => {

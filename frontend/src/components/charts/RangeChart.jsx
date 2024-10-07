@@ -78,18 +78,21 @@ const RangeChart = () => {
         {
           label: 'Mood Range',
           data: minMoodData,
-          borderColor: 'rgba(75, 192, 192, 1)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgb(255, 255, 255, 0.4)',
+          backgroundColor: 'rgb(255, 255, 255, 0.01)',
           fill: 'origin',
-          borderWidth: 2,
+          borderWidth: 1,
           pointRadius: 0,
         },
+        /*         actual range om emotions */
         {
           label: '',
           data: maxMoodData,
-          borderColor: 'rgba(75, 192, 192, 1)',
+          borderColor: 'rgb(255, 255, 255, 0.4)',
+          backgroundColor: 'rgb(255, 255, 255, 0.6)',
+
           fill: '-1',
-          borderWidth: 2,
+          borderWidth: 1,
           pointRadius: 0,
         },
       ],
@@ -116,6 +119,8 @@ const RangeChart = () => {
               },
               y: {
                 type: 'linear',
+                /*    borderColor: 'red',
+                   borderWidth: 2, */
                 title: {
                   display: true,
                   text: 'Mood (1-5)',

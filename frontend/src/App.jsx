@@ -7,7 +7,10 @@ import Logs from './pages/Logs';
 import Profile from './pages/Profile';
 import Stats from './pages/Stats';
 import Navbar from './components/Navbar';
-import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+/* import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes';
+ */
 import LogForm from './components/LogForm';
 import Tools from './pages/Tools';
 
@@ -50,14 +53,17 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/tools" element={<Tools />} />
+          <Route path="/" element={isAuthenticated ? <Navigate to="/logs" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/login" element={isAuthenticated ? <Navigate to="/logs" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/logs" element={isAuthenticated ? <Logs /> : <Navigate to="/login" />} />
           <Route path="/profile" element={isAuthenticated ? <Profile setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
           <Route path="/add-log" element={isAuthenticated ? <LogForm setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
           <Route path="/stats" element={isAuthenticated ? <Stats /> : <Navigate to="/login" />} />  {/* Add Stats route */}
 
+          <Route path="/register" element={<Register />} />
+          <Route path="/tools" element={<Tools />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
 
 
         </Routes>

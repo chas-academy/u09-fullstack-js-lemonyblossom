@@ -7,7 +7,7 @@ const logRoutes = require('./routes/logRoutes');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const resetPasswordRoutes = require('./routes/resetPasswordRoutes');
-const toolsRouter = require('./routes/toolsRouter'); 
+const toolsRoutes = require('./routes/toolsRoutes'); 
 
 const jwt = require('jsonwebtoken')
 
@@ -16,7 +16,10 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,  
+}));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
@@ -49,7 +52,7 @@ app.use('/users', userRoutes);
 app.use('/logs', logRoutes);
 app.use('/admin', adminRoutes);
 app.use('/password', resetPasswordRoutes);
-app.use('/tools', toolsRouter);
+app.use('/tools', toolsRoutes);
 
 
 app.listen(PORT, () => {

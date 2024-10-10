@@ -1,11 +1,11 @@
 const express = require('express');
-const Tool = require('../models/Tool'); // Import your Tool model
+const Tool = require('../models/Tool'); 
 const router = express.Router();
 
 // Fetch all tools
 router.get('/', async (req, res) => {
   try {
-    const tools = await Tool.find(); // Fetch all tools from the database
+    const tools = await Tool.find(); 
     res.status(200).json(tools);
   } catch (error) {
     console.error('Error fetching tools:', error);

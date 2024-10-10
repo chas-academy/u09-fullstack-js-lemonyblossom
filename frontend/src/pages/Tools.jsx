@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchBar from '../components/SearchBar';
+import '../styles/tools.css'
+
 
 const Tools = () => {
    const [tools, setTools] = useState([]);
@@ -74,7 +76,7 @@ const Tools = () => {
                      )}
 
                      <button onClick={() => handleExpand(tool._id)}>
-                        {expandedTool === tool._id ? 'Show Less' : 'Show More'}
+                        {expandedTool === tool._id ? 'Hide' : 'Show'}
                      </button>
                   </div>
                ))

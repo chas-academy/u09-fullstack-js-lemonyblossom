@@ -8,7 +8,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    
+
     if (token) {
       try {
         // Decode the token's payload to get the user's role
@@ -40,7 +40,7 @@ const Navbar = () => {
       </Link>
 
       {userRole === 'admin' && (
-        <Link to="/admin-dashboard" className={location.pathname === '/admin-dashboard' ? 'active' : ''}>
+        <Link to="/admin" className={location.pathname === '/admin-dashboard' ? 'active' : ''}>
           Admin Dashboard
         </Link>
       )}

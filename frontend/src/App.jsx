@@ -9,6 +9,7 @@ import Stats from './pages/Stats';
 import Navbar from './components/Navbar';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+import AdminDashboard from './pages/AdminDashboard';
 /* import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes';
  */
 import LogForm from './components/LogForm';
@@ -53,6 +54,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" />} />
+
           <Route path="/" element={isAuthenticated ? <Navigate to="/logs" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/login" element={isAuthenticated ? <Navigate to="/logs" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/logs" element={isAuthenticated ? <Logs /> : <Navigate to="/login" />} />

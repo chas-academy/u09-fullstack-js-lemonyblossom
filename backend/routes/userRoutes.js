@@ -57,9 +57,7 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     console.error('Error logging in user:', error);
     res.status(500).json({ message: 'Server error' });
-  }
-  console.log(token);
-});
+  }});
 
 router.post('/change-password', async (req, res) => {
   const { currentPassword, newPassword } = req.body;

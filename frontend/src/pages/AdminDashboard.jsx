@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import '../styles/form.css';
+
 
 function AdminDashboard() {
   const [users, setUsers] = useState([]);
@@ -81,7 +83,7 @@ function AdminDashboard() {
 
   return (
     <div className="admin-dashboard">
-      <h2>Admin Dashboard</h2>
+      <h2>Users</h2>
 
       {loading ? (
         <p>Loading users...</p>
@@ -100,12 +102,16 @@ function AdminDashboard() {
             <tbody>
               {users.map((user) => (
                 <tr key={user._id}>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.role}</td>
-                  <td>{new Date(user.createdAt).toLocaleString()}</td>
-                  <td>
-                    <button onClick={() => deleteUser(user._id)}>Delete</button>
+                  {/* First row: Username, Email, and Role */}
+                  <td className="username" data-label="Username">{user.username}</td>
+
+                  <td className="email" data-label="Email">{user.email}</td>
+                  <td className="role" data-label="Role">{user.role}</td>
+
+                  {/* Second row: Created At and Actions */}
+                  <td className="createdAt" data-label="Created At">{new Date(user.createdAt).toLocaleString()}</td>
+                  <td className="actions" data-label="">
+                    <button onClick={() => deleteUser(user._id)} className='delete-user-btn'>Delete</button>
                   </td>
                 </tr>
               ))}
@@ -115,7 +121,7 @@ function AdminDashboard() {
           {/* Pagination */}
           <div className="pagination">
             {[...Array(Math.ceil(totalUsers / limit)).keys()].map(page => (
-              <button
+              <button className='page-btn'
                 key={page}
                 onClick={() => handlePageChange(page + 1)}
                 disabled={currentPage === page + 1}

@@ -62,16 +62,13 @@
 .log-item button {
    background-color: transparent;
    border: none;
-   color: #9fa6f8;
+
    cursor: pointer;
    font-size: 1rem;
    margin-right: 10px;
    transition: color 0.3s;
 }
 
-.log-item button:hover {
-   color: #3e47a1;
-}
 
 
 .log-date-header {

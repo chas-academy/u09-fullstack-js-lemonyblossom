@@ -1,22 +1,31 @@
+form {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+}
+
 /* Container for the Register form */
 .form-container {
    display: flex;
    flex-direction: column;
    justify-content: flex-start;
    align-items: center;
-   color: white;
+   color: black;
    max-width: 600px;
    width: 80vw;
    max-height: 100%;
    margin: 50px auto;
    padding: 20px;
+   background-color: #ffffffe4;
 
    border-radius: 15px;
    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .profile-container {
-   box-shadow: none !important;
+   background-color: #ffffff;
+   padding: 2rem;
+   margin: 10px auto;
 
 }
 
@@ -27,18 +36,22 @@
 }
 
 .change-password-form {
+   display: flex;
    margin-top: 2rem;
    width: 100%;
    max-width: 350px;
    box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.1);
-
    padding: 10px;
    border-radius: 5px;
+   flex-direction: column;
+   align-items: center;
+   background: linear-gradient(180deg, #ffd3b2 0%, #ffb99b 60%, #ae6c4f 100%);
+
 }
 
 /* Title of the form */
 .form-container h2 {
-   color: white;
+   color: black;
    margin-bottom: 20px;
    font-size: 1.6rem;
    text-align: left;
@@ -46,11 +59,12 @@
 
 /* input fields Labels */
 .form-container label {
-   display: block;
-   margin-bottom: 10px;
-   color: white;
-   font-weight: bold;
+   width: 100%;
+   color: rgba(0, 0, 0, 0.514);
    font-size: 1rem;
+   font-style: italic;
+   text-align: left;
+
 }
 
 /* Input fields styling */
@@ -60,13 +74,16 @@
 .form-container input[type="password"],
 .form-container textarea {
 
-   width: calc(100% - 22px);
+   width: 100%;
    padding: 10px;
-   border: 2px solid #ffd1bd;
+   margin: 0.5rem 0 1rem 0;
+   border: 2px solid #ffeee600;
    border-radius: 10px;
    font-size: 1rem;
    background-color: #fff;
    box-sizing: border-box;
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.31);
+
 }
 
 /* Focus state for input fields */
@@ -79,7 +96,7 @@
 
 /* form button styling */
 .form-container button[type="submit"],
-.logout-button {
+.logout-btn {
    background-color: rgb(255, 255, 255);
    color: black;
    padding: 10px 20px;
@@ -119,14 +136,24 @@
    transform: scale(1.2);
 }
 
-.logout-button {
+.logout-btn {
    margin-top: 1rem;
+}
+
+.exit-btn {
+   width: 3vh;
+   height: 3vh;
+   display: inline-flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   align-self: flex-end;
 }
 
 
 /* Hover effect for the button */
 .form-container button[type="submit"]:hover,
-.logout-button:hover {
+.logout-btn:hover {
    background-color: rgb(0, 0, 0);
    color: white;
 }
@@ -143,132 +170,46 @@
 }
 
 .password-input-group {
+   position: relative;
+   /* This allows absolute positioning inside the container */
    width: 100%;
-   display: flex;
-   justify-items: center;
-   align-items: center;
+}
+
+.password-input-group input {
+   width: 100%;
+   padding-right: 40px;
+   /* Make space for the button inside the input */
+}
+
+.toggle-password-visibility {
+   width: 30%;
+   position: absolute;
+   right: 5px;
+   top: 32%;
+   transform: translateY(-50%);
+   background-color: transparent;
+   color: black;
+   border: none;
+   font-size: 0.9rem;
+   cursor: pointer;
+   padding: 0.2rem;
+   transition: color 0.5s ease, background-color 0.5s ease, font-weight 0.7s;
+   ;
 }
 
 
-.toggle-password-visibility {
-   min-width: 40px;
-   margin-left: 2px;
-   padding: 2px;
-   font-size: 14px;
-   cursor: pointer;
-   background-color: #007bff00;
+.hide-mode {
    color: white;
-   border: none;
-   border-radius: 4px;
+   background-color: black;
+}
+
+.show-mode {
+   color: black;
+   background-color: white;
 }
 
 .toggle-password-visibility:hover {
-   background-color: #00000017;
-}
-
-/*--------------Admin dashboard---------*/
-
-
-/* General table styling */
-table {
-   max-width: 100%;
-   border-collapse: collapse;
-   border: none;
-   background-color: #ffffffbf;
-   margin: 3px;
-   border-radius: 0.5rem;
-
-
-}
-
-table th,
-table td {
-   padding: 8px 12px;
-   border: none;
-   text-align: left;
-}
-
-table th {
-   background-color: #ffffffbf;
-}
-
-
-.admin-dashboard {
-   padding-bottom: 5vh;
-   display: flex;
-   justify-content: center;
-   flex-direction: column;
-
-}
-
-.page-btn {
-   width: 15px;
-   display: inline-flex;
-   justify-content: center;
-
-}
-
-/* Mobile styles */
-@media (max-width: 600px) {
-
-   .admin-dashboard {
-      padding-bottom: 5vh !important;
-   }
-
-   /* Hide table headers on mobile */
-   table thead {
-      display: none;
-   }
-
-   /* Display each row as a block */
-   table tr {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-   }
-
-   /* Make table cells display in flexbox with rows stacked */
-   table td {
-      flex-basis: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      position: relative;
-   }
-
-   /* Add labels before the cell content */
-   table td:before {
-      content: attr(data-label);
-      font-weight: bold;
-      text-transform: capitalize;
-   }
-
-   /* Style for username, email, and role in one row */
-   table td.username,
-   table td.email,
-   table td.role {
-      display: flex;
-      justify-content: space-between;
-   }
-
-   /* Created at and Actions on a new row */
-   table td.createdAt,
-   table td.actions {
-      flex-basis: 100%;
-   }
-
-   /* Remove border for last item */
-   table tr td:last-child {
-      border-bottom: none;
-   }
-
-   .delete-user-btn {
-      width: 14vw;
-      font-size: 0.8rem;
-      display: flex;
-      justify-content: center;
-      margin: 0;
-   }
-
-
+   background-color: #c0634e;
+   color: white;
+   font-weight: bold;
 }

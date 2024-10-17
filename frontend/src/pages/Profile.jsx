@@ -61,8 +61,8 @@ const Profile = ({ setIsAuthenticated }) => {
 
   return (
     <>
-      <UsernameDisplay />
-      <div className="form-container profile-container">
+      {/*       <UsernameDisplay />
+ */}      <div className="form-container profile-container">
         <h2>Profile</h2>
         <div className='user-info'>
           <p><strong>Username:</strong> {profileData.username}</p>
@@ -83,7 +83,7 @@ const Profile = ({ setIsAuthenticated }) => {
               <button
                 type="button"
                 onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                className="toggle-password-visibility"
+                className={`toggle-password-visibility ${showCurrentPassword ? 'hide-mode' : 'show-mode'}`}
               >
                 {showCurrentPassword ? "Hide" : "Show"}
               </button>
@@ -101,17 +101,20 @@ const Profile = ({ setIsAuthenticated }) => {
               <button
                 type="button"
                 onClick={() => setShowNewPassword(!showNewPassword)}
-                className="toggle-password-visibility"
+                className={`toggle-password-visibility ${showNewPassword ? 'hide-mode' : 'show-mode'}`}
               >
                 {showNewPassword ? "Hide" : "Show"}
               </button>
             </div>
           </div>
-          <button className="change-password-btn" type="submit">Change it!</button>
+          <button className="change-password-btn" type="submit">
+            Change it!
+          </button>
           {passwordChangeMessage && <p>{passwordChangeMessage}</p>}
         </form>
 
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
+
+        <button className="logout-btn" onClick={handleLogout}>Logout</button>
       </div>
     </>
   );

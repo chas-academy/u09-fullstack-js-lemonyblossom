@@ -1,34 +1,15 @@
-.logs-container {
-   width: 100vw;
-   height: 100%;
-   border-radius: 15px;
-}
-
 .welcome-message {
    top: 20px;
    left: 20px;
    font-size: 1.5em;
-   color: #492a58;
    align-self: flex-start;
    font-weight: bold;
    padding: 1rem;
 }
 
-.btn {
-   display: inline-block;
-   padding: 10px 20px;
-   margin: 20px 0;
-   background-color: #4e59e0;
-   color: white;
-   border: none;
-   border-radius: 10px;
-   text-decoration: none;
-   font-size: 1rem;
-   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.btn-primary:hover {
-   background-color: #3e49b0;
+.logs-container {
+   height: 100%;
+   border-radius: 15px;
 }
 
 .logs-list {
@@ -36,13 +17,15 @@
    flex-direction: column;
    gap: 10px;
    border-radius: 15px;
+   max-width: 800px;
 }
 
 .log-item {
+   display: flex;
    background-color: #ffffffe1;
    border: 1px solid #eeeded;
    border-radius: 5px;
-   padding: 20px;
+   padding: 2rem;
    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
    text-align: left;
    position: relative;
@@ -50,27 +33,26 @@
    max-width: 100%;
 }
 
-.log-item h3 {
-   color: #0dba4f;
-   margin-bottom: 10px;
+.log-item .form-container {
+   background-color: transparent;
+   padding: 0;
+   width: 100%;
+   margin: auto;
+   box-shadow: none;
+
 }
 
 .log-item p {
    margin: 5px 0;
 }
 
-.log-item button {
-   background-color: transparent;
-   border: none;
-
-   cursor: pointer;
-   font-size: 1rem;
-   margin-right: 10px;
-   transition: color 0.3s;
+.log-content {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
 }
 
-
-
-.log-date-header {
-   color: rgb(255, 255, 255);
+.btn-container {
+   display: flex;
+   justify-content: space-between;
 }

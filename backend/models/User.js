@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user'
   },
+  blocked: {  
+    type: Boolean,
+    default: false  
+  },
   savedTools: [{ 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Tool' 

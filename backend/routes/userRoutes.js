@@ -46,6 +46,15 @@ router.post('/login', async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
+
+     // Check if the user is blocked
+     if (user.blocked) {
+      return res.status(403).json({ 
+        message: 'Your account is blocked. Please contact support.', 
+        support: 'support@example.com'  });
+    }
+
+    
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
@@ -111,7 +120,7 @@ router.get('/profile', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-// SAVE A TOOL TO USER PROFILE
+/* // SAVE A TOOL TO USER PROFILE
 router.post('/saveTool', async (req, res) => {
   const { toolId } = req.body;
   const token = req.headers.authorization?.split(' ')[1];
@@ -187,7 +196,7 @@ router.get('/savedTools', async (req, res) => {
     console.error('Error fetching saved tools:', error);
     res.status(500).json({ message: 'Server error' });
   }
-});
+}); */
 
 module.exports = router;
 

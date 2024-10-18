@@ -44,6 +44,51 @@ router.get('/users', verifyAdmin, async (req, res) => {
   }
 });
 
+// Update user role (between admin and user)
+router.put('/users/:id/role', verifyAdmin, async (req, res) => {
+  const { role } = req.body;
+
+  
+  if (role !== 'admin' && role !== 'user') {
+    return res.status(400).json({ message: 'Invalid role' });
+  }
+
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.role = role;
+    await user.save();
+    res.status(200).json({ message: 'User role updated successfully', user });
+  } catch (error) {
+    console.error('Error updating user role:', error);
+    res.status(500).json({ message: 'Error updating user role' });
+  }
+});
+
+// Block or unblock a user (no changes needed here)
+router.put('/users/:id/block', verifyAdmin, async (req, res) => {
+  const { blocked } = req.body;  // expect true or false
+
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.blocked = blocked;
+    await user.save();
+    const action = blocked ? 'blocked' : 'unblocked';
+    res.status(200).json({ message: `User ${action} successfully`, user });
+  } catch (error) {
+    console.error('Error blocking/unblocking user:', error);
+    res.status(500).json({ message: 'Error blocking/unblocking user' });
+  }
+});
+
+
 // Delete a user
 router.delete('/users/:id', verifyAdmin, async (req, res) => {
   try {

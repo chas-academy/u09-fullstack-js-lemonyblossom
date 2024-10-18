@@ -39,11 +39,50 @@ function AdminDashboard() {
     fetchUsers();
   }, [currentPage]);
 
+  const updateUserRole = async (userId, newRole) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch(`http://localhost:5001/admin/users/${userId}/role`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ role: newRole }),
+      });
+
+      if (response.ok) {
+        alert('User role updated successfully');
+        setUsers(users.map(user => user._id === userId ? { ...user, role: newRole } : user));  // Update UI
+      } else {
+        alert('Failed to update user role');
+      }
+    } catch (error) {
+      console.error('Error updating user role:', error);
+    }
+  };
+
+  const blockUser = async (userId, blockStatus) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch(`http://localhost:5001/admin/users/${userId}/block`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ blocked: blockStatus }),
+      });
+
+      if (response.ok) {
+        alert(`User ${blockStatus ? 'blocked' : 'unblocked'} successfully`);
+        setUsers(users.map(user => user._id === userId ? { ...user, blocked: blockStatus } : user));  // Update UI
+      } else {
+        alert('Failed to update user status');
+      }
+    } catch (error) {
+      console.error('Error updating user status:', error);
+    }
+  };
+
   const deleteUser = async (userId) => {
     const token = localStorage.getItem('token');
     const originalUsers = [...users]; // Backup original users in case of error
 
-    // Optimistic UI update
     setUsers(users.filter(user => user._id !== userId));
 
     try {
@@ -100,21 +139,34 @@ function AdminDashboard() {
                 <th onClick={() => sortUsers('role')}>Role</th>
                 <th onClick={() => sortUsers('createdAt')}>Created At</th>
                 <th>Actions</th>
+                <th onClick={() => sortUsers('blocked')}>Blocked</th>
+
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user._id}>
-                  {/* First row: Username, Email, and Role */}
                   <td className="username" data-label="Username">{user.username}</td>
-
                   <td className="email" data-label="Email">{user.email}</td>
-                  <td className="role" data-label="Role">{user.role}</td>
+                  <td className="role" data-label="Role">
+                    <select
+                      onChange={(e) => updateUserRole(user._id, e.target.value)}
+                      value={user.role}
+                    >
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </td>
 
-                  {/* Second row: Created At and Actions */}
                   <td className="createdAt" data-label="Created At">{new Date(user.createdAt).toLocaleString()}</td>
                   <td className="actions" data-label="">
                     <button onClick={() => deleteUser(user._id)} className='delete-user-btn'>Delete</button>
+                    <button onClick={() => blockUser(user._id, !user.blocked)} className='block-user-btn'>
+                      {user.blocked ? 'Unblock' : 'Block'}
+                    </button>
+                  </td>
+                  <td className="blocked-status" data-label="Blocked">
+                    {user.blocked ? 'Yes' : 'No'}
                   </td>
                 </tr>
               ))}

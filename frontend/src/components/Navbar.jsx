@@ -21,6 +21,10 @@ const Navbar = () => {
     }
   }, []);
 
+  if (location.pathname === '/add-log') {
+    return null;
+  }
+
   return (
     <nav className="navbar">
       <Link to="/logs" className={location.pathname === '/logs' ? 'active' : ''}>

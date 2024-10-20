@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/form.css';
 
 const LogForm = ({ log, onSave, onCancel }) => {
   const [mood, setMood] = useState(log ? log.mood : 3);
@@ -44,39 +43,82 @@ const LogForm = ({ log, onSave, onCancel }) => {
   };
 
   return (
-    <div className="form-container">
-      <h2>{log ? 'Edit Log' : 'Add a New Log'}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Mood (1-5):</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={mood}
-            onChange={(e) => setMood(Number(e.target.value))}
-            required
-          />
+    <div className="log-container flex flex-col items-center max-w-[600px] w-[100%] max-h-full">
+      {/* Exit button */}
+      {onCancel && (
+        <button
+          className="exit-btn w-8 h-8 flex items-center justify-center self-end mb-4 hover:animate-spinOnce active:animate-spinOnce"
+          type="button"
+          onClick={onCancel}
+        >
+          x
+        </button>
+      )}
+
+      {/*       <h2 className="text-l font-semibold text-left w-full mb-5">{log ? 'Edit Log' : 'Add a New Log'}</h2>
+ */}
+      <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-start space-y-6">
+
+        {/* Mood */}
+        <div className="w-full">
+          <label className="w-full text-gray-700 text-md font-semibold mb-1">Mood:</label>
+          <div className="flex justify-center space-x-4">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setMood(value)}
+                className={`w-24 h-12 font-bold rounded-full flex items-center justify-center border hover:animate-pulse ${mood === value ? 'bg-black text-white' : 'bg-white text-black'}`}
+              >
+                {value}
+              </button>
+            ))}
+          </div>
         </div>
-        <div>
-          <label>Sleep Hours:</label>
-          <input
-            type="number"
-            min="0"
-            value={sleepHours}
-            onChange={(e) => setSleepHours(Number(e.target.value))}
-            required
-          />
+
+        {/* Sleep Hours */}
+        <div className="w-full">
+          <label className="w-full text-gray-700 text-md font-semibold mb-1 ">Sleep Hours:</label>
+          <div className="flex space-x-4">
+            {[
+              { label: 'None', value: 0 },
+              { label: '< 4 ', value: 3 },
+              { label: '5', value: 5 },
+              { label: '6', value: 6 },
+              { label: '7', value: 7 },
+              { label: '8', value: 8 },
+              { label: '9', value: 9 },
+              { label: '> 10', value: 10 }
+            ].map(({ label, value }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setSleepHours(value)}
+                className={`w-24 h-12 rounded-full flex items-center justify-center border font-bold hover:animate-pulse ${sleepHours === value ? 'bg-black text-white' : 'bg-white text-black'}`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
-        <div>
-          <label>Note:</label>
+
+        {/* Note Input */}
+        <div className="w-full">
+          <label className="w-full text-gray-700 text-md font-semibold mb-1">Note:</label>
           <textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
+            className="w-full p-2 mb-4 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black"
           />
         </div>
-        <button type="submit">{log ? 'Done' : 'Add Log'}</button>
-        {onCancel && <button type="button" onClick={onCancel}>Cancel</button>}
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="bg-white text-black w-24 self-center max-w-xs py-3 mt-4 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300"
+        >
+          {log ? 'Save' : 'Add Log'}
+        </button>
       </form>
     </div>
   );

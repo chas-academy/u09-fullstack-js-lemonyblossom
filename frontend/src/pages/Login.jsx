@@ -15,7 +15,18 @@ const Login = ({ setIsAuthenticated }) => {
     try {
       const response = await axios.post('http://localhost:5001/users/login', { email, password });
 
-      if (response.data.token) {
+      // If the user is blocked
+      if (response.status === 403 && response.data.support) {
+        setError(
+          <>
+            Your account is blocked. Please{' '}
+            <a href={`mailto:${response.data.support}`} target="_blank" rel="noopener noreferrer">
+              contact support
+            </a>.
+          </>
+        );
+      } else if (response.data.token) {
+        // Handle successful login
         localStorage.setItem('token', response.data.token);
         setIsAuthenticated(true);
         navigate('/logs');

@@ -1,4 +1,4 @@
-table {
+/* table {
    max-width: 100%;
    border-collapse: collapse;
    border: none;
@@ -39,25 +39,22 @@ table th {
 }
 
 /* Mobile styles */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
 
    .admin-dashboard {
       padding-bottom: 5vh !important;
    }
 
-   /* Hide table headers on mobile */
    table thead {
       display: none;
    }
 
-   /* Display each row as a block */
    table tr {
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 10px;
    }
 
-   /* Make table cells display in flexbox with rows stacked */
    table td {
       flex-basis: 100%;
       display: flex;
@@ -66,14 +63,12 @@ table th {
       position: relative;
    }
 
-   /* Add labels before the cell content */
    table td:before {
       content: attr(data-label);
       font-weight: bold;
       text-transform: capitalize;
    }
 
-   /* Style for username, email, and role in one row */
    table td.username,
    table td.email,
    table td.role {
@@ -81,13 +76,11 @@ table th {
       justify-content: space-between;
    }
 
-   /* Created at and Actions on a new row */
    table td.createdAt,
    table td.actions {
       flex-basis: 100%;
    }
 
-   /* Remove border for last item */
    table tr td:last-child {
       border-bottom: none;
    }
@@ -101,4 +94,4 @@ table th {
    }
 
 
-}
+} */

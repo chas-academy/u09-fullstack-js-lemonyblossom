@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LogForm from '../components/LogForm';
 import UsernameDisplay from '../components/UsernameDisplay';
-/* import '../styles/logs.css';
- */
+import { useFade } from '../hooks/useFade';
 
 const Logs = () => {
   const [logs, setLogs] = useState([]);
   const [editingLogId, setEditingLogId] = useState(null); // Track which log is being edited
   const navigate = useNavigate();
+
+  const { isVisible, shouldRender, fadeIn, fadeOut } = useFade(300);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -17,13 +18,16 @@ const Logs = () => {
     if (!token) {
       navigate('/login');
     } else {
-      axios.get('http://localhost:5001/logs', {
-        headers: { Authorization: `Bearer ${token}` }
-      }).then(response => {
-        setLogs(response.data);
-      }).catch(error => {
-        console.error('Error fetching logs:', error);
-      });
+      axios
+        .get('http://localhost:5001/logs', {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(response => {
+          setLogs(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching logs:', error);
+        });
     }
   }, [navigate]);
 
@@ -41,7 +45,14 @@ const Logs = () => {
 
   const handleSave = (updatedLog) => {
     setLogs(logs.map(log => (log._id === updatedLog._id ? updatedLog : log)));
-    setEditingLogId(null);  // Exit editing mode after saving
+    fadeOut(() => setEditingLogId(null));
+  };
+
+  const handleEditClick = (logId) => {
+    fadeOut(() => {
+      setEditingLogId(logId);
+      fadeIn();
+    });
   };
 
   const formatDate = (dateString) => {
@@ -69,37 +80,40 @@ const Logs = () => {
         <div className="logs-list w-screen max-w-[800px] flex flex-col justify-center">
           {Object.keys(groupedLogs).map(date => (
             <div key={date} className="log-group mb-5">
-              <h3 className="log-date-header text-lg font-bold mb-3">{date}</h3>
+              <h3 className="log-date-header text-lg font-bold mb-3 ml-5">{date}</h3>
               {groupedLogs[date].map(log => (
-                <div key={log._id} className="log-item bg-white/80 p-4 mb-4 rounded-lg shadow-md">
-                  {editingLogId === log._id ? (
-                    <LogForm
-                      log={log}
-                      onSave={handleSave}
-                      onCancel={() => setEditingLogId(null)}
-                    />
+                <div
+                  key={log._id}
+                  className={`log-item bg-white/80 p-4 mb-4 rounded-lg shadow-md transition-all duration-300 ease-in-out ${editingLogId === log._id ? 'max-h-[800px]' : 'max-h-[200px]'
+                    } overflow-hidden`} // Smoothly expand or collapse
+                >
+                  {editingLogId === log._id && shouldRender ? (
+                    <div className={`LogForm-Container flex  transition-opacity duration-300 justify-center ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+                      <LogForm
+                        log={log}
+                        onSave={handleSave}
+                        onCancel={() => fadeOut(() => setEditingLogId(null))}
+                      />
+                    </div>
                   ) : (
                     <>
-                      <div className='log-item-content min-w-full flex flex-col text-left'>
-                        <p className="font-semibold"><strong>Time:</strong> {formatTime(log.createdAt)}</p>
+                      <div className="log-item-content min-w-full flex flex-col text-left">
+                        <p className="font-semibold">
+                          <strong>Time:</strong> {formatTime(log.createdAt)}
+                        </p>
                         <p><strong>Mood:</strong> {log.mood} / 5</p>
                         <p><strong>Sleep:</strong> {log.sleepHours} hours</p>
                         <p><strong>Note:</strong> {log.note}</p>
-
-                      </div><div className="btn-container mt-2 flex justify-between">
+                      </div>
+                      <div className="btn-container mt-2 flex justify-between">
                         <button
-                          onClick={() => setEditingLogId(log._id)}
+                          onClick={() => handleEditClick(log._id)}
                         >
                           Edit
                         </button>
-                        <button
-                          onClick={() => handleDelete(log._id)}
-                        >
-                          Delete
-                        </button>
+                        <button onClick={() => handleDelete(log._id)}>Delete</button>
                       </div>
                     </>
-
                   )}
                 </div>
               ))}

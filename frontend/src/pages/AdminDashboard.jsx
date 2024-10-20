@@ -1,9 +1,4 @@
 import { useEffect, useState } from 'react';
-import '../styles/form.css';
-import '../styles/adminDashboard.css';
-
-
-
 
 function AdminDashboard() {
   const [users, setUsers] = useState([]);
@@ -124,32 +119,65 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="admin-dashboard">
-      <h2>Users</h2>
+    <div className="admin-dashboard flex flex-col justify-center max-w-screen py-7">
+      <h2 className="text-xl font-bold mb-4">All Users</h2>
+      {/* Sorting Dropdown for Mobile */}
+      <div className="Sorting block md:hidden mb-2 rounded:md ">
+        <label htmlFor="sort" className="font-bold">Sort by:</label>
+        <select
+          id="sort"
+          className="ml-2 p-2 border rounded"
+          onChange={(e) => sortUsers(e.target.value)}
+        >
+          <option value="username">Username</option>
+          <option value="email">Email</option>
+          <option value="role">Role</option>
+          <option value="createdAt">Created At</option>
+          <option value="blocked">Status</option>
+        </select>
+      </div>
 
       {loading ? (
         <p>Loading users...</p>
       ) : (
-        <>
-          <table>
-            <thead>
-              <tr>
-                <th onClick={() => sortUsers('username')}>Username</th>
-                <th onClick={() => sortUsers('email')}>Email</th>
-                <th onClick={() => sortUsers('role')}>Role</th>
-                <th onClick={() => sortUsers('createdAt')}>Created At</th>
-                <th>Actions</th>
-                <th onClick={() => sortUsers('blocked')}>Blocked</th>
-
-              </tr>
+        <div className="flex flex-col justify-center">
+          <table className="max-w-screen border-collapse">
+            <thead className="bg-white/60 hidden md:table-header-group">
+              <tr className='max-w-screen'>
+                <th onClick={() => sortUsers('username')} className="md:pl-5 p-2.5 text-left">Username</th>
+                <th onClick={() => sortUsers('email')} className="p-2.5 text-left">Email</th>
+                <th onClick={() => sortUsers('role')} className="p-2.5 text-left">Role</th>
+                <th onClick={() => sortUsers('createdAt')} className="p-2.5 text-left">Created At</th>
+                <th onClick={() => sortUsers('blocked')} className="p-2.5 text-left">Status</th>
+                {/*                 <th className="p-2.5 text-left">Delete</th>
+ */}              </tr>
             </thead>
-            <tbody>
+            <tbody className='mt-5 text-left pl-6'>
               {users.map((user) => (
-                <tr key={user._id}>
-                  <td className="username" data-label="Username">{user.username}</td>
-                  <td className="email" data-label="Email">{user.email}</td>
-                  <td className="role" data-label="Role">
-                    <select
+                <tr
+                  key={user._id}
+                  className="ROW border-b-2 border-white md:table-row flex flex-col md:flex-row bg-white/80 mb-1 p-3"
+                >
+                  {/* First row: Username, Email, and Role */}
+                  <td className="userName md:pl-5 w-full md:w-auto flex justify-between md:justify-center md:table-cell font-semibold ">
+                    {/*                     <span className="md:hidden font-semibold">Username: </span>
+ */}                    {user.username}
+                  </td>
+                  <td className="email w-auto flex justify-between md:justify-center md:table-cell">
+                    <span className="md:hidden font-md">Email: </span>
+                    {user.email}
+                  </td>
+
+
+                  {/* Second row on mobile: Created At, Block, Delete */}
+                  <td className="createdAt w-auto md:w-auto flex justify-between md:justify-center md:table-cell">
+                    <span className="md:hidden font-md">Created: </span>
+                    {new Date(user.createdAt).toLocaleString()}
+                  </td>
+                  <td className="role w-full md:w-auto flex justify-between md:justify-center md:table-cell">
+                    {/*                     <span className="md:hidden font-medium">Role: </span>
+ */}                    <select
+                      className="border-white border-2 p-1 rounded"
                       onChange={(e) => updateUserRole(user._id, e.target.value)}
                       value={user.role}
                     >
@@ -157,16 +185,20 @@ function AdminDashboard() {
                       <option value="admin">Admin</option>
                     </select>
                   </td>
-
-                  <td className="createdAt" data-label="Created At">{new Date(user.createdAt).toLocaleString()}</td>
-                  <td className="actions" data-label="">
-                    <button onClick={() => deleteUser(user._id)} className='delete-user-btn'>Delete</button>
-                    <button onClick={() => blockUser(user._id, !user.blocked)} className='block-user-btn'>
+                  <td className="status  w-full md:w-auto flex flex-row justify-around md:table-cell mt-2">
+                    <button
+                      onClick={() => blockUser(user._id, !user.blocked)}
+                      className="border rounded-lg text-sm"
+                    >
                       {user.blocked ? 'Unblock' : 'Block'}
                     </button>
-                  </td>
-                  <td className="blocked-status" data-label="Blocked">
-                    {user.blocked ? 'Yes' : 'No'}
+
+                    <button
+                      onClick={() => deleteUser(user._id)}
+                      className="border rounded-lg text-sm"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -174,18 +206,14 @@ function AdminDashboard() {
           </table>
 
           {/* Pagination */}
-          <div className="pagination">
+          <div className="pagination my-2 flex justify-center">
             {[...Array(Math.ceil(totalUsers / limit)).keys()].map(page => (
-              <button className='page-btn'
-                key={page}
-                onClick={() => handlePageChange(page + 1)}
-                disabled={currentPage === page + 1}
-              >
+              <button className="page-btn mx-2" key={page} onClick={() => handlePageChange(page + 1)} disabled={currentPage === page + 1}>
                 {page + 1}
               </button>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

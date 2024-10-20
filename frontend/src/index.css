@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   height: 100%;
@@ -15,6 +19,24 @@ body {
 
 }
 
+/*--ADMIN DASHBOARD--*/
+.admin-dashboard {
+  padding-bottom: 5vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.page-btn {
+  width: 15px;
+  display: inline-flex;
+  justify-content: center;
+  margin: 5px;
+  padding: 0.2rem 0.8rem !important;
+}
+
+
+/*--CODE--*/
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

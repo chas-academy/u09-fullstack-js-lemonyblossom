@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LogForm from '../components/LogForm';
-import UsernameDisplay from '../components/UsernameDisplay'; 
-import '../styles/logs.css';
+import UsernameDisplay from '../components/UsernameDisplay';
+/* import '../styles/logs.css';
+ */
 
 const Logs = () => {
   const [logs, setLogs] = useState([]);
@@ -62,14 +63,15 @@ const Logs = () => {
 
   return (
     <>
-      <UsernameDisplay /> 
-      <div className="logs-container"> 
-        <div className="logs-list">
+      <UsernameDisplay />
+      <div className="logs-container flex flex-col max-w-screen mx-auto py-7">
+        {/* Logs grouped by date */}
+        <div className="logs-list w-screen max-w-[800px] flex flex-col justify-center">
           {Object.keys(groupedLogs).map(date => (
-            <div key={date}>
-              <h3 className="log-date-header">{date}</h3>
+            <div key={date} className="log-group mb-5">
+              <h3 className="log-date-header text-lg font-bold mb-3">{date}</h3>
               {groupedLogs[date].map(log => (
-                <div key={log._id} className="log-item">
+                <div key={log._id} className="log-item bg-white/80 p-4 mb-4 rounded-lg shadow-md">
                   {editingLogId === log._id ? (
                     <LogForm
                       log={log}
@@ -77,14 +79,27 @@ const Logs = () => {
                       onCancel={() => setEditingLogId(null)}
                     />
                   ) : (
-                    <div>
-                      <p><strong>Time:</strong> {formatTime(log.createdAt)}</p>
-                      <p><strong>Mood:</strong> {log.mood} / 5</p>
-                      <p><strong>Sleep:</strong> {log.sleepHours} hours</p>
-                      <p><strong>Note:</strong> {log.note}</p>
-                      <button onClick={() => setEditingLogId(log._id)}>Edit</button>
-                      <button onClick={() => handleDelete(log._id)}>Delete</button>
-                    </div>
+                    <>
+                      <div className='log-item-content min-w-full flex flex-col text-left'>
+                        <p className="font-semibold"><strong>Time:</strong> {formatTime(log.createdAt)}</p>
+                        <p><strong>Mood:</strong> {log.mood} / 5</p>
+                        <p><strong>Sleep:</strong> {log.sleepHours} hours</p>
+                        <p><strong>Note:</strong> {log.note}</p>
+
+                      </div><div className="btn-container mt-2 flex justify-between">
+                        <button
+                          onClick={() => setEditingLogId(log._id)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(log._id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </>
+
                   )}
                 </div>
               ))}

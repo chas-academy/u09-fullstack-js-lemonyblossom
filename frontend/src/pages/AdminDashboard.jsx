@@ -119,7 +119,7 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="admin-dashboard flex flex-col justify-center max-w-screen py-7">
+    <div className="admin-dashboard flex flex-col justify-center w-screen max-w-[800px] py-7">
       <h2 className="text-xl font-bold mb-4">All Users</h2>
       {/* Sorting Dropdown for Mobile */}
       <div className="Sorting block md:hidden mb-2 rounded:md ">

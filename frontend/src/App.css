@@ -1,15 +1,16 @@
 .App {
-
-  text-align: center;
+  /* text-align: center; */
   flex-direction: column;
   font-family: 'Arial', sans-serif;
   max-width: 100vw;
   display: flex;
-
+  align-items: center;
+  /* align-content: center; */
+  justify-content: center;
 }
 
 h2 {
-  color: white;
+  color: black;
 }
 
 a {

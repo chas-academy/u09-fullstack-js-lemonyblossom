@@ -14,6 +14,7 @@ import AdminDashboard from './pages/AdminDashboard';
  */
 import LogForm from './components/LogForm';
 import Tools from './pages/Tools';
+import NewLogForm from './components/NewLogForm';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -60,7 +61,7 @@ function App() {
           <Route path="/login" element={isAuthenticated ? <Navigate to="/logs" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/logs" element={isAuthenticated ? <Logs /> : <Navigate to="/login" />} />
           <Route path="/profile" element={isAuthenticated ? <Profile setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
-          <Route path="/add-log" element={isAuthenticated ? <LogForm setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
+          <Route path="/add-log" element={isAuthenticated ? <NewLogForm setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
           <Route path="/stats" element={isAuthenticated ? <Stats /> : <Navigate to="/login" />} />  {/* Add Stats route */}
 
           <Route path="/register" element={<Register />} />

@@ -14,7 +14,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://feelstate.netlify.app/users/register', {
+      const response = await axios.post('https://u09-fullstack-js-lemonyblossom.onrender.com/users/register', {
         username,
         email,
         password,

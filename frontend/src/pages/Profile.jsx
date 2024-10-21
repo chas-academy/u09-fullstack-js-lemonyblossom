@@ -21,7 +21,7 @@ const Profile = ({ setIsAuthenticated }) => {
         navigate('/login');
       } else {
         try {
-          const response = await axios.get('https://feelstate.netlify.app/users/profile', {
+          const response = await axios.get('https://u09-fullstack-js-lemonyblossom.onrender.com/users/profile', {
             headers: { Authorization: `Bearer ${token}` }
           });
           setProfileData(response.data);
@@ -41,7 +41,7 @@ const Profile = ({ setIsAuthenticated }) => {
     const token = localStorage.getItem('token');
     try {
       const response = await axios.post(
-        'https://feelstate.netlify.app/users/change-password',
+        'https://u09-fullstack-js-lemonyblossom.onrender.com/users/change-password',
         { currentPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );

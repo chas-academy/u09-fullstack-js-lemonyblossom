@@ -33,7 +33,7 @@ const NewLogForm = () => {
 
       try {
          const { data } = await axios.post(
-            'https://feelstate.netlify.app//logs',
+            'https://u09-fullstack-js-lemonyblossom.onrender.com/logs',
             { mood, sleepHours, note },
             { headers: { Authorization: `Bearer ${token}` } }
          );

@@ -17,7 +17,7 @@ const MoodCounterChart = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5001/logs', {
+        const response = await axios.get('https://u09-fullstack-js-lemonyblossom.onrender.com/logs', {
           headers: { Authorization: `Bearer ${token}` },
         });
 

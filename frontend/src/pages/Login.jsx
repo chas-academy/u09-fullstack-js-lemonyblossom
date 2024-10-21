@@ -13,7 +13,7 @@ const Login = ({ setIsAuthenticated }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://feelstate.netlify.app/users/login', { email, password });
+      const response = await axios.post('https://u09-fullstack-js-lemonyblossom.onrender.com/users/login', { email, password });
 
       // If the user is blocked
       if (response.status === 403 && response.data.support) {

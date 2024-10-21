@@ -35,7 +35,7 @@ const RangeChart = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('https://feelstate.netlify.app/logs', {
+        const response = await axios.get('https://u09-fullstack-js-lemonyblossom.onrender.com/logs', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setData(response.data);

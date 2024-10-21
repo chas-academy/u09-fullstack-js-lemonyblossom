@@ -30,7 +30,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
         onSave(data.log);
       } else {
         const { data } = await axios.post(
-          'https://feelstate.netlify.app/logs',
+          'https://u09-fullstack-js-lemonyblossom.onrender.com/logs',
           { mood, sleepHours, note },
           { headers: { Authorization: `Bearer ${token}` } }
         );

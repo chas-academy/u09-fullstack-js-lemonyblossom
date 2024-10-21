@@ -19,7 +19,7 @@ const Logs = () => {
       navigate('/login');
     } else {
       axios
-        .get('https://feelstate.netlify.app/logs', {
+        .get('https://u09-fullstack-js-lemonyblossom.onrender.com/logs', {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
@@ -34,7 +34,7 @@ const Logs = () => {
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`https://feelstate.netlify.app/logs/${id}`, {
+      await axios.delete(`https://u09-fullstack-js-lemonyblossom.onrender.com/logs/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setLogs(logs.filter(log => log._id !== id)); // Update the UI

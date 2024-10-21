@@ -19,7 +19,9 @@ Administrationshantering:
 GET /admin/users: Hämtar användare med paginering (kräver admin).
 DELETE /admin/users/:id: Tar bort en användare (kräver admin) -->
 ## Bas-URL
-https://feelstate.netlify.app
+https://u09-fullstack-js-lemonyblossom.onrender.com
+<!-- http://localhost:5001 -->
+
 
 ## Autentisering
 Många endpoints kräver en JWT-token för autentisering. Token ska inkluderas i `Authorization`-headern i varje begäran:

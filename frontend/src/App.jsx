@@ -25,7 +25,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await fetch('https://feelstate.netlify.app/verifyToken', {
+          const response = await fetch('https://u09-fullstack-js-lemonyblossom.onrender.com/verifyToken', {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (response.ok) {

@@ -23,7 +23,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
     try {
       if (log) {
         const { data } = await axios.put(
-          `https://feelstate.netlify.app/logs/${log._id}`,
+          `https://u09-fullstack-js-lemonyblossom.onrender.com/logs/${log._id}`,
           { mood, sleepHours, note },
           { headers: { Authorization: `Bearer ${token}` } }
         );

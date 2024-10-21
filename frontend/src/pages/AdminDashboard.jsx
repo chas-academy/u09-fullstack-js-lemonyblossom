@@ -37,7 +37,7 @@ function AdminDashboard() {
   const updateUserRole = async (userId, newRole) => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`http://localhost:5001/admin/users/${userId}/role`, {
+      const response = await fetch(`https://u09-fullstack-js-lemonyblossom.onrender.com/admin/users/${userId}/role`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ role: newRole }),
@@ -57,7 +57,7 @@ function AdminDashboard() {
   const blockUser = async (userId, blockStatus) => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`http://localhost:5001/admin/users/${userId}/block`, {
+      const response = await fetch(`https://u09-fullstack-js-lemonyblossom.onrender.com/admin/users/${userId}/block`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ blocked: blockStatus }),
@@ -81,7 +81,7 @@ function AdminDashboard() {
     setUsers(users.filter(user => user._id !== userId));
 
     try {
-      const response = await fetch(`http://localhost:5001/admin/users/${userId}`, {
+      const response = await fetch(`https://u09-fullstack-js-lemonyblossom.onrender.com/admin/users/${userId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });

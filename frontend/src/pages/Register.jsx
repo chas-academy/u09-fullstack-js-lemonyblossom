@@ -14,7 +14,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5001/users/register', {
+      const response = await axios.post('https://feelstate.netlify.app/users/register', {
         username,
         email,
         password,

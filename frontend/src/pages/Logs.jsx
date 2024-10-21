@@ -19,7 +19,7 @@ const Logs = () => {
       navigate('/login');
     } else {
       axios
-        .get('http://localhost:5001/logs', {
+        .get('https://feelstate.netlify.app/logs', {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
@@ -34,7 +34,7 @@ const Logs = () => {
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5001/logs/${id}`, {
+      await axios.delete(`https://feelstate.netlify.app/logs/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setLogs(logs.filter(log => log._id !== id)); // Update the UI

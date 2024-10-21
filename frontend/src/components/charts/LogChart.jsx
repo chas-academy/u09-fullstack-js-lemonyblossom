@@ -23,7 +23,7 @@ const LogChart = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5001/logs', {
+        const response = await axios.get('https://feelstate.netlify.app/logs', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setData(response.data);

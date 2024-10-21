@@ -10,7 +10,7 @@ const ForgotPassword = () => {
       e.preventDefault();
 
       try {
-         const response = await axios.post('http://localhost:5001/password/request-password-reset', { email });
+         const response = await axios.post('https://feelstate.netlify.app/password/request-password-reset', { email });
          setMessage('Password reset link has been sent to your email.');
          setError('');
       } catch (error) {

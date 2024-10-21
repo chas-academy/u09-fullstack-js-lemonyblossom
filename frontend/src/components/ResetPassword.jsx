@@ -19,7 +19,7 @@ const ResetPassword = () => {
       }
 
       try {
-         const response = await axios.post(`http://localhost:5001/password/reset-password/${token}`, { newPassword });
+         const response = await axios.post(`https://feelstate.netlify.app/password/reset-password/${token}`, { newPassword });
          setMessage('Password has been reset successfully. You can now login.');
          setError('');
          setTimeout(() => {

@@ -21,7 +21,7 @@ const Profile = ({ setIsAuthenticated }) => {
         navigate('/login');
       } else {
         try {
-          const response = await axios.get('http://localhost:5001/users/profile', {
+          const response = await axios.get('https://feelstate.netlify.app/users/profile', {
             headers: { Authorization: `Bearer ${token}` }
           });
           setProfileData(response.data);
@@ -41,7 +41,7 @@ const Profile = ({ setIsAuthenticated }) => {
     const token = localStorage.getItem('token');
     try {
       const response = await axios.post(
-        'http://localhost:5001/users/change-password',
+        'https://feelstate.netlify.app/users/change-password',
         { currentPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );

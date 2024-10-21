@@ -25,7 +25,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await fetch('http://localhost:5001/verifyToken', {
+          const response = await fetch('https://feelstate.netlify.app/verifyToken', {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (response.ok) {

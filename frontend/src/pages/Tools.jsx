@@ -14,7 +14,7 @@ const Tools = () => {
    const fetchTools = async (query = '') => {
       try {
          // If query, fetch filtered 
-         const url = query ? `http://localhost:5001/tools/search?q=${query}` : 'http://localhost:5001/tools';
+         const url = query ? `https://feelstate.netlify.app/tools/search?q=${query}` : 'https://feelstate.netlify.app/tools';
          const response = await axios.get(url);
 
          if (Array.isArray(response.data)) {

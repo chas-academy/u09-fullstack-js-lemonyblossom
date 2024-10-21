@@ -23,14 +23,14 @@ const LogForm = ({ log, onSave, onCancel }) => {
     try {
       if (log) {
         const { data } = await axios.put(
-          `http://localhost:5001/logs/${log._id}`,
+          `https://feelstate.netlify.app/logs/${log._id}`,
           { mood, sleepHours, note },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         onSave(data.log);
       } else {
         const { data } = await axios.post(
-          'http://localhost:5001/logs',
+          'https://feelstate.netlify.app/logs',
           { mood, sleepHours, note },
           { headers: { Authorization: `Bearer ${token}` } }
         );

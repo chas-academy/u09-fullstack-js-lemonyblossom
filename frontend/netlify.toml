@@ -1,0 +1,9 @@
+[build]
+command = "npm run build"
+publish = "frontend/build"
+functions = "netlify/functions"  # If you are using serverless functions, otherwise remove this line.
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200

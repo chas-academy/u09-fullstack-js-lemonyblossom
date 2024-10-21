@@ -69,8 +69,8 @@ const RangeChart = () => {
     }, {});
 
     const labels = Object.keys(groupedByDate).sort();
-    const minMoodData = labels.map(date => groupedByDate[date].minMood);
-    const maxMoodData = labels.map(date => groupedByDate[date].maxMood);
+    const minMoodData = labels.map((date) => groupedByDate[date].minMood);
+    const maxMoodData = labels.map((date) => groupedByDate[date].maxMood);
 
     return {
       labels,
@@ -84,13 +84,11 @@ const RangeChart = () => {
           borderWidth: 1,
           pointRadius: 0,
         },
-        /*         actual range om emotions */
         {
           label: '',
           data: maxMoodData,
           borderColor: 'rgb(255, 255, 255, 0.4)',
           backgroundColor: 'rgb(255, 255, 255, 0.6)',
-
           fill: '-1',
           borderWidth: 1,
           pointRadius: 0,
@@ -102,9 +100,9 @@ const RangeChart = () => {
   const chartData = prepareData();
 
   return (
-    <div className="chart-wrapper">
-      <div className="chart-container">
-        <h2>Mood Range Data</h2>
+    <div className="w-full md:w-3/4 lg:w-3/5 mx-auto">
+      <div className="mx-auto max-w-full h-full">
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-center mb-4">Mood Range Data</h2>
         <Line
           ref={chartRef}
           data={chartData}
@@ -119,8 +117,6 @@ const RangeChart = () => {
               },
               y: {
                 type: 'linear',
-                /*    borderColor: 'red',
-                   borderWidth: 2, */
                 title: {
                   display: true,
                   text: 'Mood (1-5)',

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import 'chartjs-adapter-date-fns';
 import { Line } from 'react-chartjs-2';
-import '../../styles/charts.css';
+import 'chartjs-adapter-date-fns';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,15 +13,7 @@ import {
   Legend,
 } from 'chart.js';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend);
 
 const LogChart = () => {
   const [data, setData] = useState([]);
@@ -44,14 +35,6 @@ const LogChart = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
-    };
-  }, []);
-
   const prepareData = () => {
     if (data.length === 0) return { labels: [], datasets: [] };
 
@@ -64,10 +47,10 @@ const LogChart = () => {
     }, {});
 
     const labels = Object.keys(groupedByDate).sort((a, b) => new Date(a) - new Date(b));
-    const moodData = labels.map(date =>
+    const moodData = labels.map((date) =>
       groupedByDate[date].mood.reduce((a, b) => a + b, 0) / groupedByDate[date].mood.length
     );
-    const sleepData = labels.map(date =>
+    const sleepData = labels.map((date) =>
       groupedByDate[date].sleep.reduce((a, b) => a + b, 0) / groupedByDate[date].sleep.length
     );
 
@@ -99,9 +82,9 @@ const LogChart = () => {
   const chartData = prepareData();
 
   return (
-    <div className="chart-wrapper">
-      <div className="chart-container">
-        <h2>Sleep and Mood Data</h2>
+    <div className="w-full md:w-3/4 lg:w-3/5">
+      <div className="mx-auto max-w-full h-full">
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-center mb-4">Sleep and Mood Data</h2>
         <Line
           ref={chartRef}
           data={chartData}

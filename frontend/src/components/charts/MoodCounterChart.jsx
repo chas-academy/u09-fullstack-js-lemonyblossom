@@ -21,7 +21,6 @@ const MoodCounterChart = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        // Filter logs to only include entries from the current month
         const currentMonth = new Date().getMonth();
         const currentYear = new Date().getFullYear();
 
@@ -30,7 +29,6 @@ const MoodCounterChart = () => {
           return logDate.getMonth() === currentMonth && logDate.getFullYear() === currentYear;
         });
 
-        // Count mood levels
         const counts = filteredData.reduce((acc, log) => {
           const mood = log.mood;
           if (!acc[mood]) {
@@ -49,7 +47,6 @@ const MoodCounterChart = () => {
     fetchData();
   }, []);
 
-  // Prepare data for the chart
   const chartData = {
     labels: Object.keys(moodCounts).map(mood => `Mood ${mood}`),
     datasets: [
@@ -64,12 +61,7 @@ const MoodCounterChart = () => {
           'rgba(50 , 50, 50, 0.8)',
         ],
         borderColor: [
-          'rgba(255, 255, 255, 1)'
-          /*    'rgba(2, 99, 132, 1)',
-             'rgba(54, 162, 235, 1)',
-             'rgba(255, 206, 86, 1)',
-             'rgba(75, 192, 192, 1)',
-             'rgba(153, 102, 255, 1)', */
+          'rgba(255, 255, 255, 1)',
         ],
         borderWidth: 1,
       },
@@ -77,9 +69,9 @@ const MoodCounterChart = () => {
   };
 
   return (
-    <div className="chart-wrapper">
-      <div className="chart-container">
-        <h2>Monthly Moods</h2>
+    <div className="w-full md:w-3/4 lg:w-3/5 mx-auto">
+      <div className="max-w-full h-full">
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-center mb-4">Monthly Moods</h2>
         <Doughnut
           data={chartData}
           options={{

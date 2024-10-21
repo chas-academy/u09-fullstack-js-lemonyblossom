@@ -120,13 +120,13 @@ function AdminDashboard() {
 
   return (
     <div className="admin-dashboard flex flex-col justify-center w-screen max-w-[800px] py-7">
-      <h2 className="text-xl font-bold mb-4">All Users</h2>
+      <h2 className="text-xl font-bold mb-4 text-center">All Users</h2>
       {/* Sorting Dropdown for Mobile */}
-      <div className="Sorting block md:hidden mb-2 rounded:md ">
-        <label htmlFor="sort" className="font-bold">Sort by:</label>
+      <div className="relative flex flex-row justify-end items-center md:hidden mb-2 rounded:md">
+        <label htmlFor="sort" className="font-italic mr-2">Sort by:</label>
         <select
           id="sort"
-          className="ml-2 p-2 border rounded"
+          className="p-2 border rounded bg-white text-right" // Add text-right here to right-align
           onChange={(e) => sortUsers(e.target.value)}
         >
           <option value="username">Username</option>

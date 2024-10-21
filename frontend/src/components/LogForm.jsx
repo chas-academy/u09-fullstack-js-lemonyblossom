@@ -47,7 +47,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
       {/* Exit button */}
       {onCancel && (
         <button
-          className="exit-btn w-8 h-8 flex items-center justify-center self-end mb-4 hover:animate-spinOnce active:animate-spinOnce"
+          className="exit-btn w-8 h-8 flex items-center justify-center self-end mb-4  hover:animate-spinOnce"
           type="button"
           onClick={onCancel}
         >
@@ -68,7 +68,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
                 key={value}
                 type="button"
                 onClick={() => setMood(value)}
-                className={`w-24 h-12 font-bold rounded-full flex items-center justify-center border hover:animate-pulse ${mood === value ? 'bg-black text-white' : 'bg-white text-black'}`}
+                className={`w-24 h-12 font-bold rounded-full flex items-center justify-center border hover:animate-pulse hover:scale-110 ${mood === value ? 'bg-black text-white' : 'bg-white text-black'}`}
               >
                 {value}
               </button>
@@ -81,7 +81,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
           <label className="w-full text-gray-700 text-md font-semibold mb-1 ">Sleep Hours:</label>
           <div className="flex space-x-4">
             {[
-              { label: 'None', value: 0 },
+              { label: '0', value: 0 },
               { label: '< 4 ', value: 3 },
               { label: '5', value: 5 },
               { label: '6', value: 6 },
@@ -94,7 +94,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
                 key={value}
                 type="button"
                 onClick={() => setSleepHours(value)}
-                className={`w-24 h-12 rounded-full flex items-center justify-center border font-bold hover:animate-pulse ${sleepHours === value ? 'bg-black text-white' : 'bg-white text-black'}`}
+                className={`w-24 h-12 rounded-full flex items-center justify-center border font-bold hover:animate-pulse hover:scale-110 ${sleepHours === value ? 'bg-black text-white' : 'bg-white text-black'}`}
               >
                 {label}
               </button>

@@ -89,7 +89,7 @@ const NewLogForm = () => {
                >
                   <div className="flex flex-col items-center justify-center space-y-4">
                      {[
-                        { label: 'None', value: 0 },
+                        { label: '0', value: 0 },
                         { label: '< 4 hours', value: 3 },
                         { label: '5 hours', value: 5 },
                         { label: '6 hours', value: 6 },
@@ -119,7 +119,7 @@ const NewLogForm = () => {
                   <textarea
                      value={note}
                      onChange={(e) => setNote(e.target.value)}
-                     className="w-screen max-w-[600px] h-[30vh] p-2 mb-4 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-black"
+                     className="w-screen max-w-[600px] h-[50vh] p-2 mb-4 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-black"
                   />
                </div>
             )}

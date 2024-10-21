@@ -78,20 +78,22 @@ const RangeChart = () => {
         {
           label: 'Mood Range',
           data: minMoodData,
-          borderColor: 'rgb(255, 255, 255, 0.4)',
+          borderColor: 'rgb(255, 255, 255)',
           backgroundColor: 'rgb(255, 255, 255, 0.01)',
           fill: 'origin',
           borderWidth: 1,
           pointRadius: 0,
+          tension: 0.4,
         },
         {
           label: '',
           data: maxMoodData,
-          borderColor: 'rgb(255, 255, 255, 0.4)',
-          backgroundColor: 'rgb(255, 255, 255, 0.6)',
+          borderColor: 'rgb(255, 255, 255)',
+          backgroundColor: 'rgb(255, 255, 255)',
           fill: '-1',
           borderWidth: 1,
           pointRadius: 0,
+          tension: 0.4,
         },
       ],
     };
@@ -102,7 +104,7 @@ const RangeChart = () => {
   return (
     <div className="w-full md:w-3/4 lg:w-3/5 mx-auto">
       <div className="mx-auto max-w-full h-full">
-        <h2 className="text-xl md:text-2xl lg:text-3xl text-center mb-4">Mood Range Data</h2>
+        <h2 className="text-xl text-center mb-4">Mood Range Data</h2>
         <Line
           ref={chartRef}
           data={chartData}
@@ -119,7 +121,7 @@ const RangeChart = () => {
                 type: 'linear',
                 title: {
                   display: true,
-                  text: 'Mood (1-5)',
+                  text: 'Mood',
                 },
               },
             },

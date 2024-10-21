@@ -65,6 +65,8 @@ const LogChart = () => {
           yAxisID: 'y1',
           borderWidth: 1,
           pointRadius: 2,
+          tension: 0.2,
+
         },
         {
           label: 'Sleep Hours',
@@ -74,6 +76,8 @@ const LogChart = () => {
           yAxisID: 'y2',
           borderWidth: 1,
           pointRadius: 2,
+          tension: 0.2,
+
         },
       ],
     };
@@ -84,7 +88,7 @@ const LogChart = () => {
   return (
     <div className="w-full md:w-3/4 lg:w-3/5">
       <div className="mx-auto max-w-full h-full">
-        <h2 className="text-xl md:text-2xl lg:text-3xl text-center mb-4">Sleep and Mood Data</h2>
+        <h2 className="text-xl text-center mb-4">Sleep and Mood Data</h2>
         <Line
           ref={chartRef}
           data={chartData}

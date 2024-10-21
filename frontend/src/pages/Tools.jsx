@@ -10,11 +10,14 @@ const Tools = () => {
    const [error, setError] = useState('');
    const [expandedTool, setExpandedTool] = useState(null);
 
-   // Fetch tools (filtered by search query)
+
+   // Fetch tools by search query)
    const fetchTools = async (query = '') => {
       try {
-         // If query, fetch filtered 
-         const url = query ? `https://u09-fullstack-js-lemonyblossom.onrender.com/tools/search?q=${query}` : 'http://localhost:5001/tools';
+         // If query, fetch filtered tools
+         const url = query
+            ? `https://u09-fullstack-js-lemonyblossom.onrender.com/tools/search?q=${query}`
+            : 'https://u09-fullstack-js-lemonyblossom.onrender.com/tools';
          const response = await axios.get(url);
 
          if (Array.isArray(response.data)) {
@@ -29,19 +32,10 @@ const Tools = () => {
       }
    };
 
-   // Fetch all on mount
+   //fetch on query changes
    useEffect(() => {
-      fetchTools(); // all on init
-   }, []);
-
-   // on searchQuery change
-   useEffect(() => {
-      if (searchQuery) {
-         fetchTools(searchQuery); //
-      } else {
-         fetchTools();
-      }
-   }, [searchQuery]);
+      fetchTools(searchQuery);
+   }, [searchQuery]);  //fetch all on mount and when query change
 
    const handleExpand = (toolId) => {
       setExpandedTool(expandedTool === toolId ? null : toolId);
@@ -51,12 +45,12 @@ const Tools = () => {
       <div>
          <h2>Therapy Tools</h2>
 
-         {/* SearchBar component to handle search input */}
+         {/* SearchBar*/}
          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
          {error && <p>{error}</p>}
 
-         {/* Render tools only if tools is array */}
+         {/* Render if tools is array */}
          <div className="tools-grid">
             {Array.isArray(tools) && tools.length > 0 ? (
                tools.map((tool) => (

@@ -42,8 +42,8 @@ const Tools = () => {
    };
 
    return (
-      <div>
-         <h2>Therapy Tools</h2>
+      <div className='Tools-container fixed top-10 max-w-[600px] w-screen'>
+         <h2 className="text-xl">Therapy Tools</h2>
 
          {/* SearchBar*/}
          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />

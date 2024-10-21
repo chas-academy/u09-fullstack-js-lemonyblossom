@@ -26,7 +26,7 @@ const UsernameDisplay = () => {
   }, [navigate]);
 
   return (
-    <div className="welcome-message w-screen self-left text-xl font-bold p-5">Hello, {username}!</div>
+    <div className="welcome-message flex flex-row w-screen self-center text-xl font-bold p-4">Hello, {username}!</div>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LogForm from '../components/LogForm';
@@ -75,20 +75,28 @@ const Logs = () => {
   return (
     <>
       <UsernameDisplay />
-      <div className="logs-container flex flex-col max-w-screen mx-auto py-7">
+      <div className="logs-container flex flex-col h-screen text-white">
+        <h2 className="text-4xl font-bold mb-10">Your Logs</h2>
+
         {/* Logs grouped by date */}
-        <div className="logs-list w-screen max-w-[800px] flex flex-col justify-center">
+        <div className="logs-list w-full max-w-3xl space-y-6">
           {Object.keys(groupedLogs).map(date => (
-            <div key={date} className="log-group mb-5">
-              <h3 className="log-date-header text-lg font-bold mb-3 ml-5">{date}</h3>
-              {groupedLogs[date].map(log => (
+            <div key={date} className="log-group mb-8">
+              <h3 className="log-date-header text-2xl font-semibold mb-6 text-gray-200">{date}</h3>
+              {groupedLogs[date].map((log, index) => (
                 <div
                   key={log._id}
-                  className={`log-item bg-white/80 p-4 mb-4 rounded-lg shadow-md transition-all duration-300 ease-in-out ${editingLogId === log._id ? 'max-h-[800px]' : 'max-h-[200px]'
-                    } overflow-hidden`} // Smoothly expand or collapse
+                  className={`log-item bg-white/80 p-4 md:p-6 mb-6 rounded-xl shadow-lg transform transition-all duration-500 ease-out hover:scale-105 hover:shadow-xl ${editingLogId === log._id ? 'max-h-[800px]' : 'max-h-[300px]'
+                    } overflow-hidden w-full max-w-md mx-auto`}
+                  style={{
+                    opacity: 0,
+                    transform: 'translateY(20px)',
+                    animation: `fadeInUp 0.5s ease-in-out forwards`,
+                    animationDelay: `${index * 0.2}s`
+                  }}
                 >
                   {editingLogId === log._id && shouldRender ? (
-                    <div className={`LogForm-Container flex  transition-opacity duration-300 justify-center ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+                    <div className={`LogForm-Container flex justify-center transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                       <LogForm
                         log={log}
                         onSave={handleSave}
@@ -97,7 +105,7 @@ const Logs = () => {
                     </div>
                   ) : (
                     <>
-                      <div className="log-item-content min-w-full flex flex-col text-left">
+                      <div className="log-item-content flex flex-col text-left space-y-2 text-gray-900 text-sm md:text-base">
                         <p className="font-semibold">
                           <strong>Time:</strong> {formatTime(log.createdAt)}
                         </p>
@@ -105,13 +113,19 @@ const Logs = () => {
                         <p><strong>Sleep:</strong> {log.sleepHours} hours</p>
                         <p><strong>Note:</strong> {log.note}</p>
                       </div>
-                      <div className="btn-container mt-2 flex justify-between">
+                      <div className="btn-container mt-4 flex justify-between space-x-2 md:space-x-4">
                         <button
+                          className="bg-indigo-600 text-white font-semibold py-1 px-3 md:py-2 md:px-4 rounded-lg shadow-md hover:bg-indigo-500 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 ease-out text-sm md:text-base"
                           onClick={() => handleEditClick(log._id)}
                         >
                           Edit
                         </button>
-                        <button onClick={() => handleDelete(log._id)}>Delete</button>
+                        <button
+                          className="bg-red-500 text-white font-semibold py-1 px-3 md:py-2 md:px-4 rounded-lg shadow-md hover:bg-red-400 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 ease-out text-sm md:text-base"
+                          onClick={() => handleDelete(log._id)}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </>
                   )}

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './App.css';
+import LandingPage from './pages/LandingPage';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logs from './pages/Logs';
@@ -10,9 +11,6 @@ import Navbar from './components/Navbar';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import AdminDashboard from './pages/AdminDashboard';
-/* import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes';
- */
-import LogForm from './components/LogForm';
 import Tools from './pages/Tools';
 import NewLogForm from './components/NewLogForm';
 
@@ -25,7 +23,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await fetch('https://u09-fullstack-js-lemonyblossom.onrender.com/verifyToken', {
+          const response = await fetch(['https://u09-fullstack-js-lemonyblossom.onrender.com/verifyToken', 'http://localhost:5001/verifytoken'], {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (response.ok) {
@@ -53,11 +51,12 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" />} />
+      <div className="App fixed inset-x-0 mx-auto flex items-center justify-center max-w-[600px] h-screen font-sans bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500">
 
-          <Route path="/" element={isAuthenticated ? <Navigate to="/logs" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Routes>
+
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" />} />
           <Route path="/login" element={isAuthenticated ? <Navigate to="/logs" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/logs" element={isAuthenticated ? <Logs /> : <Navigate to="/login" />} />
           <Route path="/profile" element={isAuthenticated ? <Profile setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
@@ -71,8 +70,10 @@ function App() {
 
 
         </Routes>
+        <Navbar />
+
       </div>
-      <Navbar />
+
     </Router>
   );
 }

@@ -6,7 +6,7 @@ import { useFade } from '../hooks/useFade'; // Import the hook
 const NewLogForm = () => {
    const [step, setStep] = useState(1);
    const [mood, setMood] = useState(3);
-   const [sleepHours, setSleepHours] = useState(8);
+   const [sleepHours, setSleepHours] = useState(8); // Default sleep hours
    const [note, setNote] = useState('');
    const navigate = useNavigate();
 
@@ -45,17 +45,17 @@ const NewLogForm = () => {
    };
 
    return (
-      <div className="flex justify-center items-center h-screen md:max-h-[1200px]">
+      <div className="flex justify-center items-center h-screen md:max-h-[1200px] ">
          <form
             onSubmit={handleSubmit}
-            className="h-screen  w-screen max-w-[600px] flex flex-col items-center relative"
+            className="h-screen w-screen max-w-[600px] flex flex-col items-center relative"
          >
             {/* label positioning */}
             {shouldRender && (
                <div
-                  className={`transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'} absolute top-10 w-screen text-xl font-bold text-center`}
+                  className={`transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'} absolute top-10 w-screen text-xl font-bold text-center text-white`}
                >
-                  {step === 1 && 'How\'s your Mood?'}
+                  {step === 1 && "How's your Mood?"}
                   {step === 2 && 'How Many Hours Did You Sleep?'}
                   {step === 3 && 'Note:'}
                </div>
@@ -72,7 +72,9 @@ const NewLogForm = () => {
                            key={value}
                            type="button"
                            onClick={() => setMood(value)}
-                           className={`w-24 h-12 font-bold rounded-full flex items-center justify-center border ${mood === value ? 'bg-black text-white' : 'bg-gray-100 text-black'
+                           className={`w-24 h-12 font-bold rounded-full flex items-center justify-center border transition-transform duration-300 ease-out hover:scale-110 ${mood === value
+                              ? 'bg-gradient-to-br  from-pink-500 to-orange-400 border-2 border-white text-white shadow:sm animate-pulse'
+                              : 'bg-gradient-to-br  from-indigo-500 to-blue-300 text-white'
                               }`}
                         >
                            {value}
@@ -82,31 +84,23 @@ const NewLogForm = () => {
                </div>
             )}
 
-            {/* Step 2: Sleep Hours */}
+            {/* Step 2: Sleep Hours (Slider) */}
             {step === 2 && shouldRender && (
                <div
                   className={`transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'} absolute inset-0 flex flex-col items-center justify-center`}
                >
-                  <div className="flex flex-col items-center justify-center space-y-4">
-                     {[
-                        { label: '0', value: 0 },
-                        { label: '< 4 hours', value: 3 },
-                        { label: '5 hours', value: 5 },
-                        { label: '6 hours', value: 6 },
-                        { label: '7 hours', value: 7 },
-                        { label: '8 hours', value: 8 },
-                        { label: '9 hours', value: 9 },
-                        { label: '> 10 hours', value: 10 }
-                     ].map(({ label, value }) => (
-                        <button
-                           key={value}
-                           type="button"
-                           onClick={() => setSleepHours(value)}
-                           className={`w-24 h-12 rounded-full flex items-center justify-center border font-bold ${sleepHours === value ? 'bg-black text-white' : 'bg-gray-100 text-black'}`}
-                        >
-                           {label}
-                        </button>
-                     ))}
+                  <label className="text-white text-lg mb-2">Sleep Hours: {sleepHours}</label>
+                  <input
+                     type="range"
+                     min="0"
+                     max="12"
+                     value={sleepHours}
+                     onChange={(e) => setSleepHours(Number(e.target.value))}
+                     className="w-3/4 appearance-none h-2 bg-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-white transition-all"
+                  />
+                  <div className="flex justify-between w-3/4 text-white text-sm mt-2">
+                     <span>0h</span>
+                     <span>12h</span>
                   </div>
                </div>
             )}
@@ -119,12 +113,13 @@ const NewLogForm = () => {
                   <textarea
                      value={note}
                      onChange={(e) => setNote(e.target.value)}
-                     className="w-screen max-w-[600px] h-[50vh] p-2 mb-4 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-black"
+                     className="w-screen max-w-[600px] h-[50vh] p-2 mb-4 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-white bg-transparent text-white placeholder-white"
+                     placeholder="Enter your notes here..."
                   />
                </div>
             )}
 
-            {/* position fixed buttons */}
+            {/* Navigation Buttons */}
             <div className="fixed bottom-10 w-full flex justify-between px-24">
                {step === 1 && (
                   <>

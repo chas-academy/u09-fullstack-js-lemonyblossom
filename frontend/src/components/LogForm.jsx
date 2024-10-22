@@ -43,11 +43,11 @@ const LogForm = ({ log, onSave, onCancel }) => {
   };
 
   return (
-    <div className="log-container flex flex-col items-center max-w-[600px] w-[100%] max-h-full">
+    <div className="log-container flex flex-col items-center max-w-[600px] w-[100%] max-h-full p-6 rounded-lg text-black ">
       {/* Exit button */}
       {onCancel && (
         <button
-          className="exit-btn w-8 h-8 flex items-center justify-center self-end mb-4  hover:animate-spinOnce"
+          className="exit-btn w-8 h-8 flex items-center justify-center self-end mb-4 bg-white text-black rounded-full shadow hover:bg-black hover:text-white transition duration-300"
           type="button"
           onClick={onCancel}
         >
@@ -55,20 +55,20 @@ const LogForm = ({ log, onSave, onCancel }) => {
         </button>
       )}
 
-      {/*       <h2 className="text-l font-semibold text-left w-full mb-5">{log ? 'Edit Log' : 'Add a New Log'}</h2>
- */}
-      <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-start space-y-6">
-
+      <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-start space-y-6 ">
         {/* Mood */}
         <div className="w-full">
-          <label className="w-full text-gray-700 text-md font-semibold mb-1">Mood:</label>
+          <label className="w-full text-md font-semibold mb-1">Mood:</label>
           <div className="flex justify-center space-x-4">
             {[1, 2, 3, 4, 5].map((value) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => setMood(value)}
-                className={`w-24 h-12 font-bold rounded-full flex items-center justify-center border hover:animate-pulse hover:scale-110 ${mood === value ? 'bg-black text-white' : 'bg-white text-black'}`}
+                className={`w-20 h-10 md:w-24 md:h-12 font-bold rounded-full hover:shadow-md flex items-center justify-center transition-transform duration-300 ease-out hover:scale-105  ${mood === value
+                  ? 'bg-gradient-to-br  from-pink-500 to-orange-400 border-2 border-white text-white shadow:sm animate-pulse'
+                  : 'bg-gradient-to-br  from-indigo-500 to-blue-300 text-white'
+                  }`}
               >
                 {value}
               </button>
@@ -76,46 +76,38 @@ const LogForm = ({ log, onSave, onCancel }) => {
           </div>
         </div>
 
-        {/* Sleep Hours */}
+        {/* Sleep Hours Slider */}
         <div className="w-full">
-          <label className="w-full text-gray-700 text-md font-semibold mb-1 ">Sleep Hours:</label>
-          <div className="flex space-x-4">
-            {[
-              { label: '0', value: 0 },
-              { label: '< 4 ', value: 3 },
-              { label: '5', value: 5 },
-              { label: '6', value: 6 },
-              { label: '7', value: 7 },
-              { label: '8', value: 8 },
-              { label: '9', value: 9 },
-              { label: '> 10', value: 10 }
-            ].map(({ label, value }) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setSleepHours(value)}
-                className={`w-24 h-12 rounded-full flex items-center justify-center border font-bold hover:animate-pulse hover:scale-110 ${sleepHours === value ? 'bg-black text-white' : 'bg-white text-black'}`}
-              >
-                {label}
-              </button>
-            ))}
+          <label className="w-full text-md font-semibold mb-1">Sleep Hours: {sleepHours}</label>
+          <input
+            type="range"
+            min="0"
+            max="12"
+            value={sleepHours}
+            onChange={(e) => setSleepHours(Number(e.target.value))}
+            className="w-full appearance-none h-2 bg-white rounded-lg focus:outline-white/60 focus:ring-2 focus:ring-indigo-200/50 transition-all"
+          />
+          <div className="flex justify-between text-sm mt-2">
+            <span>0h</span>
+            <span>12h</span>
           </div>
         </div>
 
         {/* Note Input */}
         <div className="w-full">
-          <label className="w-full text-gray-700 text-md font-semibold mb-1">Note:</label>
+          <label className="w-full  text-md font-semibold mb-1">Note:</label>
           <textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            className="w-full p-2 mb-4 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full p-3 rounded-md shadow-sm border-2 border-white bg-white/80 text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-white"
+            placeholder="Enter your notes..."
           />
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-white text-black w-24 self-center max-w-xs py-3 mt-4 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300"
+          className="bg-white text-black w-28 self-center max-w-xs py-3 mt-4 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300 ease-in-out animate-pulse"
         >
           {log ? 'Save' : 'Add Log'}
         </button>

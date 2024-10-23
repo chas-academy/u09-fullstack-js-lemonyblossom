@@ -26,39 +26,34 @@ const Navbar = () => {
 
   return (
     <nav className="navbar w-screen md:max-w-[600px] lg:[1200px] bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 shadow-lg fixed bottom-0 z-10 text-white">
-      <div className="max-w-[600px] mx-auto flex justify-around py-4 text-white text-sm md:text-base">
+      <div className="max-w-[600px] items-center mx-auto flex justify-around py-2 text-white text-sm font-semibold  md:text-base ">
         <Link
           to="/logs"
-          className={`${location.pathname === '/logs' ? 'border-b-2 border-white' : ''
-            } hover:text-indigo-200 active:rotate-12 transition duration-300`}
+          className="hover:scale-90 active:scale-110 transition duration-300"
         >
           Logs
         </Link>
         <Link
           to="/stats"
-          className={`${location.pathname === '/stats' ? 'border-b-2 border-white' : ''
-            } hover:text-indigo-200 transition duration-300`}
+          className="hover:scale-90 active:scale-110 transition duration-300"
         >
           Stats
         </Link>
         <Link
           to="/add-log"
-          className={`${location.pathname === '/add-log' ? 'border-b-2 border-white' : ''
-            } hover:text-indigo-200 transition duration-300`}
+          className="ADD-LOG flex flex-col justify-center items-center text-xl hover:scale-150 hover:-translate-y-2 hover:bg-indigo-600/60 hover:border hover:border-indigo-200 w-9 h-9 rounded-full active:scale-110 transition-transform duration-300"
         >
-          Log
+          +
         </Link>
         <Link
           to="/profile"
-          className={`${location.pathname === '/profile' ? 'border-b-2 border-white' : ''
-            } hover:text-indigo-200 transition duration-300`}
+          className="hover:scale-90 active:scale-110 transition duration-300"
         >
           Profile
         </Link>
         <Link
           to="/tools"
-          className={`${location.pathname === '/tools' ? 'border-b-2 border-white' : ''
-            } hover:text-indigo-200 transition duration-300`}
+          className="hover:scale-90 active:scale-110 transition duration-300"
         >
           Tools
         </Link>
@@ -66,8 +61,7 @@ const Navbar = () => {
         {userRole === 'admin' && (
           <Link
             to="/admin"
-            className={`${location.pathname === '/admin-dashboard' ? 'border-b-2 border-white' : ''
-              } hover:text-indigo-200 transition duration-300`}
+            className="hover:scale-90 active:scale-110 transition duration-300"
           >
             Admin
           </Link>

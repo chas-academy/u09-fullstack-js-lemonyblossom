@@ -1,2 +1,2 @@
-# Mood Tracker App
+# FeelState
 Hur min app fungerar!

@@ -45,19 +45,19 @@ const NewLogForm = () => {
    };
 
    return (
-      <div className="flex justify-center w-screen md:max-w-[600px] lg:[1200px] items-center h-screen md:max-h-[1200px] ">
+      <div className="flex flex-col justify-between w-screen md:max-w-[600px] lg:max-w-[1200px] items-center h-full md:max-h-screen ">
          <form
             onSubmit={handleSubmit}
-            className="h-screen w-screen md:max-w-[600px] flex flex-col items-center relative"
+            className=" w-full md:max-w-[600px] flex flex-col items-center "
          >
             {/* label positioning */}
             {shouldRender && (
                <div
-                  className={`transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'} absolute top-10 w-screen text-xl font-bold text-center text-white`}
+                  className={`transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'} absolute top-10 w-full text-xl font-bold text-center text-white`}
                >
                   {step === 1 && "How's your Mood?"}
                   {step === 2 && 'How Many Hours Did You Sleep?'}
-                  {step === 3 && 'Note:'}
+                  {step === 3 && 'Anything else to add?'}
                </div>
             )}
 
@@ -89,7 +89,7 @@ const NewLogForm = () => {
                <div
                   className={`transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'} absolute inset-0 flex flex-col items-center justify-center`}
                >
-                  <label className="text-white text-lg mb-2">Sleep Hours: {sleepHours}</label>
+                  <label className="text-white text-lg mb-2">{sleepHours} hours</label>
                   <input
                      type="range"
                      min="0"
@@ -113,27 +113,27 @@ const NewLogForm = () => {
                   <textarea
                      value={note}
                      onChange={(e) => setNote(e.target.value)}
-                     className="w-screen max-w-[600px] h-[50vh] p-2 mb-4 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-white bg-transparent text-white placeholder-white"
+                     className="w-full bg-white/50 max-w-[600px] h-[50vh] p-2 mb-4 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 text-white placeholder-white"
                      placeholder="Enter your notes here..."
                   />
                </div>
             )}
 
             {/* Navigation Buttons */}
-            <div className="w-screen md:max-w-[600px] lg:[1200px] flex justify-between px-24">
+            <div className="w-screen md:max-w-[600px] lg:[1200px] flex justify-between absolute bottom-10 px-10">
                {step === 1 && (
                   <>
                      <button
                         type="button"
                         onClick={() => navigate('/logs')}
-                        className="bg-white text-black w-[6rem] max-w-[6rem] py-3 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300"
+                        className="  hover:text-white font-semibold w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-lg hover:shadow-indigo-800/80 hover:scale-95 text-white/80 transition duration-300"
                      >
-                        Logs
+                        &lt; Logs
                      </button>
                      <button
                         type="button"
                         onClick={nextStep}
-                        className="bg-white text-black w-[6rem] max-w-[6rem] py-3 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300"
+                        className="  hover:text-white font-semibold w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-lg hover:shadow-indigo-800/80 hover:scale-95 text-white/80 transition duration-300"
                      >
                         Next
                      </button>
@@ -145,14 +145,14 @@ const NewLogForm = () => {
                      <button
                         type="button"
                         onClick={prevStep}
-                        className="bg-white text-black w-[6rem] max-w-[6rem] py-3 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300"
+                        className="  hover:text-white font-semibold w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-lg hover:shadow-indigo-800/80 hover:scale-95 text-white/80 transition duration-300"
                      >
                         Previous
                      </button>
                      <button
                         type="button"
                         onClick={nextStep}
-                        className="bg-white text-black w-[6rem] max-w-[6rem] py-3 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300"
+                        className="  hover:text-white font-semibold w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-lg hover:shadow-indigo-800/80 hover:scale-95 text-white/80 transition duration-300"
                      >
                         Next
                      </button>
@@ -164,13 +164,13 @@ const NewLogForm = () => {
                      <button
                         type="button"
                         onClick={prevStep}
-                        className="bg-white text-black w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300"
+                        className="  hover:text-white font-semibold w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-lg hover:shadow-indigo-800/80 hover:scale-95 text-white/80 transition duration-300"
                      >
                         Previous
                      </button>
                      <button
                         type="submit"
-                        className="bg-white text-black font-semibold w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-lg ring-2 ring-green-500 ring-inset hover:bg-black hover:ring-black hover:text-white transition duration-300"
+                        className="bg-gradient-to-br  from-indigo-500 to-blue-300 text-white font-semibold w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-md shadow-indigo-800 ring-2 ring-inset hover:ring-white hover:bg-gradient-to-br  hover:from-pink-500 hover:to-orange-400  hover:shadow-sm hover:animate-pulse hover:text-white transition duration-300"
                      >
                         Done
                      </button>
@@ -178,6 +178,7 @@ const NewLogForm = () => {
                )}
             </div>
          </form>
+
       </div>
    );
 };

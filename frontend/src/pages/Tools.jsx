@@ -38,7 +38,7 @@ const Tools = () => {
    };
 
    return (
-      <div className="ToolsPage overflow-y-auto flex flex-col items-center justify-start min-h-screen w-screen md:max-w-[600px] lg:[1200px] bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 py-10 scrollbar-none">
+      <div className="ToolsPage flex flex-col items-center justify-start min-h-screen w-screen md:max-w-[600px] lg:[1200px] bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 py-10 scrollbar-none">
          <h2 className="text-4xl font-bold mb-8">Therapy Tools</h2>
 
          {/* SearchBar */}

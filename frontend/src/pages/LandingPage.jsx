@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import loaderIcon from '../../src/loading.png';
+
 
 const LandingPage = () => {
    return (
@@ -31,38 +33,7 @@ const LandingPage = () => {
                Click the image to explore our tools!
             </p>
          </div>
-         <div className="flex flex-col items-center space-y-4">
-            <Link to="/tools">
-               <div className="relative group">
-                  <img
-                     src="https://via.placeholder.com/400x300" // Replace with an actual image URL
-                     alt="Explore Tools"
-                     className="w-96 h-64 object-cover rounded-xl shadow-lg transform transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-2xl"
-                  />
-                  {/* Overlay effect */}
-                  <div className="absolute inset-0 bg-black bg-opacity-30 rounded-xl opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
-               </div>
-            </Link>
-            <p className="text-gray-300 text-lg animate-fadeInUp opacity-0 animation-delay-3">
-               Click the image to explore our tools!
-            </p>
-         </div>
-         <div className="flex flex-col items-center space-y-4">
-            <Link to="/tools">
-               <div className="relative group">
-                  <img
-                     src="https://via.placeholder.com/400x300" // Replace with an actual image URL
-                     alt="Explore Tools"
-                     className="w-96 h-64 object-cover rounded-xl shadow-lg transform transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-2xl"
-                  />
-                  {/* Overlay effect */}
-                  <div className="absolute inset-0 bg-black bg-opacity-30 rounded-xl opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
-               </div>
-            </Link>
-            <p className="text-gray-300 text-lg animate-fadeInUp opacity-0 animation-delay-3">
-               Click the image to explore our tools!
-            </p>
-         </div>
+
       </div>
    );
 };

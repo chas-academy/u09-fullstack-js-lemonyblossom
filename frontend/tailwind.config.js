@@ -20,6 +20,10 @@ export default {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        spinSlow: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' },
+        },
         softBounce: {
           '0%, 100%': {
             transform: 'translateY(0) scale(1, 1)',
@@ -40,6 +44,7 @@ export default {
       },
       animation: {
         spinOnce: 'spinOnce 500ms ease-in-out',
+        spinSlow: 'spinSlow 1s linear infinite',
         softBounce: 'softBounce 1s infinite', 
         fadeInUp: 'fadeInUp 1s ease-out forwards',
 

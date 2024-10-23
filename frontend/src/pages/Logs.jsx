@@ -75,8 +75,23 @@ const Logs = () => {
   return (
     <>
       <div className="logs-container flex flex-col h-screen w-screen md:max-w-[600px] lg:[1200px] text-white scrollbar-none">
-        <UsernameDisplay />
+        {/* <div className='GreetingAndProfile flex flex-row justify-between p-2'>
+          <UsernameDisplay />
+          <Link
+            to="/profile"
+            className="ADD-LOG fixed top-10 right-10 flex justify-center items-center text-xl hover:scale-150 hover:bg-indigo-600/60 hover:border hover:border-indigo-200 w-10 h-10 rounded-full bg-indigo-400 active:scale-110 transition-transform duration-300 text-white"
+          >
+            +
+          </Link>
+        </div> */}
+        <div className="GreetingAndProfile w-full flex flex-row justify-between p-2">
+          <UsernameDisplay />
+          <Link
+            to="/profile">
+            <img src="/user-fill.png" alt="Logo" className="h-11 w-12 hover:scale-110" />
 
+          </Link>
+        </div>
         {/* Logs grouped by date */}
         <div className="logs-list w-full max-w-3xl space-y-6">
           {Object.keys(groupedLogs).map(date => (
@@ -132,13 +147,7 @@ const Logs = () => {
               ))}
             </div>
           ))}
-          {/* Add-Log Btn float */}
-          <Link
-            to="/add-log"
-            className="ADD-LOG fixed top-10 right-10 flex justify-center items-center text-xl hover:scale-150 hover:bg-indigo-600/60 hover:border hover:border-indigo-200 w-10 h-10 rounded-full bg-indigo-400 active:scale-110 transition-transform duration-300 text-white"
-          >
-            +
-          </Link>
+
         </div>
 
       </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import loaderIcon from '../../src/loading.png';
 
 function AdminDashboard() {
   const [users, setUsers] = useState([]);
@@ -138,7 +139,11 @@ function AdminDashboard() {
       </div>
 
       {loading ? (
-        <p>Loading users...</p>
+        <div className="LOADER flex items-center justify-center h-screen ">
+          <div className="relative flex items-center justify-center w-36 h-36 rounded-full animate-spinSlow">
+            <img src={loaderIcon} alt="Loading users..." className="absolute w-24 h-24" /> {/* Customize size */}
+          </div>
+        </div>
       ) : (
         <div className="flex flex-col justify-center">
           <table className="max-w-screen border-collapse">

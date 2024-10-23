@@ -8,11 +8,12 @@ import Logs from './pages/Logs';
 import Profile from './pages/Profile';
 import Stats from './pages/Stats';
 import Navbar from './components/Navbar';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './components/ResetPassword';
+/* import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './components/ResetPassword'; */
 import AdminDashboard from './pages/AdminDashboard';
 import Tools from './pages/Tools';
 import NewLogForm from './components/NewLogForm';
+import loaderIcon from '../src/loading.png';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,9 +24,10 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await fetch(['https://u09-fullstack-js-lemonyblossom.onrender.com/verifyToken', 'http://localhost:5001/verifytoken'], {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          const response = await fetch("https://u09-fullstack-js-lemonyblossom.onrender.com/verifyToken",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            });
           if (response.ok) {
             setIsAuthenticated(true);
           } else {
@@ -46,9 +48,14 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="LOADER flex items-center justify-center h-screen ">
+        <div className="relative flex items-center justify-center w-36 h-36 rounded-full animate-spinSlow">
+          <img src={loaderIcon} alt="Loading..." className="absolute w-24 h-24" /> {/* Customize size */}
+        </div>
+      </div>
+    );
   }
-
   return (
     <Router>
       <div className="App fixed inset-0 mx-auto p-2 flex items-start justify-center md:max-w-[600px] lg:max-w-[1200px] w-screen h-screen font-sans bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 overflow-hidden overflow-y-auto">
@@ -56,17 +63,21 @@ function App() {
         <Routes>
 
           <Route path="/" element={<LandingPage />} />
+
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={isAuthenticated ? <Logs /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/tools" element={<Tools />} />
+          {/* <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} /> */}
+
           <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" />} />
-          <Route path="/login" element={isAuthenticated ? <Navigate to="/logs" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/logs" element={isAuthenticated ? <Logs /> : <Navigate to="/login" />} />
           <Route path="/profile" element={isAuthenticated ? <Profile setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
           <Route path="/add-log" element={isAuthenticated ? <NewLogForm setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
           <Route path="/stats" element={isAuthenticated ? <Stats /> : <Navigate to="/login" />} />  {/* Add Stats route */}
 
-          <Route path="/register" element={<Register />} />
-          <Route path="/tools" element={<Tools />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="*" element={<Navigate to="/" />} />
+
 
 
         </Routes>

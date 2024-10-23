@@ -10,7 +10,7 @@ const UsernameDisplay = () => {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      navigate('/login');
+      navigate('/');
     } else {
       try {
         const decodedToken = jwtDecode(token);
@@ -20,7 +20,7 @@ const UsernameDisplay = () => {
         setUsername(capitalizedUsername);
       } catch (error) {
         console.error('Error decoding token:', error);
-        navigate('/login');
+        navigate('/');
       }
     }
   }, [navigate]);

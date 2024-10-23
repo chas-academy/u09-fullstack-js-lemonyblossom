@@ -43,11 +43,12 @@ const LogForm = ({ log, onSave, onCancel }) => {
   };
 
   return (
-    <div className="log-container flex flex-col items-center md:max-w-[600px] lg:[1200px] w-screen max-h-full p-6 rounded-lg text-black ">
+    <div className="log-container flex flex-col items-center w-full h-full p-3 text-black ">
       {/* Exit button */}
       {onCancel && (
         <button
-          className="exit-btn w-8 h-8 flex items-center justify-center self-end mb-4 bg-white text-black rounded-full shadow hover:bg-black hover:text-white transition duration-300"
+          className="exit-btn w-8 h-8 flex items-center justify-center self-end mb-4 bg-gradient-to-br  from-indigo-500 to-blue-300 text-white rounded-full shadow shadow-indigo-800 hover:from-pink-500 hover:to-orange-400 transition duration-300 hover:animate-spinOnce"
+
           type="button"
           onClick={onCancel}
         >
@@ -107,7 +108,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-white text-black w-28 self-center max-w-xs py-3 mt-4 rounded-full shadow-lg hover:bg-black hover:text-white transition duration-300 ease-in-out animate-pulse"
+          className="bg-gradient-to-br  from-indigo-500 to-blue-300 text-white font-semibold w-[6rem] max-w-[6rem] py-3 mt-4 rounded-full shadow-md shadow-indigo-800 ring-2 ring-inset hover:ring-white hover:bg-gradient-to-br  hover:from-pink-500 hover:to-orange-400  hover:shadow-sm hover:animate-pulse hover:text-white transition duration-300"
         >
           {log ? 'Save' : 'Add Log'}
         </button>

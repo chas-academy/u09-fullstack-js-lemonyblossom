@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import 'animate.css'; // Optional: You can add animate.css for more complex animations
 
 const LandingPage = () => {
    return (

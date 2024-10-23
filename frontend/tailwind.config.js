@@ -5,6 +5,11 @@ export default {
   ],
   theme: {
     extend: {
+      scrollbarHide: {
+        '-webkit-scrollbar': 'none', // Chrome, Safari, and Edge
+        '-ms-overflow-style': 'none', // IE and Edge
+        'scrollbar-width': 'none', // Firefox
+      },
       animationDelay: {
         '1': '0.5s',
         '2': '1s',
@@ -41,5 +46,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }

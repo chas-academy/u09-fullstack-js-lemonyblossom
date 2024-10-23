@@ -38,7 +38,7 @@ const Login = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div className="flex justify-center p-2 w-full max-w-300px items-center min-h-screen">
+    <div className="flex justify-center p-2 w-screen max-w-[600px] items-center min-h-screen">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">

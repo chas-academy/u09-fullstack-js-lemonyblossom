@@ -38,7 +38,7 @@ const Tools = () => {
    };
 
    return (
-      <div className="flex flex-col items-center justify-start min-h-screen min-w-screen w-screen max-w-[600px] bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 py-10">
+      <div className="flex flex-col items-center justify-start min-h-screen w-screen max-w-[600px] bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 py-10">
          <h2 className="text-4xl font-bold mb-8">Therapy Tools</h2>
 
          {/* SearchBar */}

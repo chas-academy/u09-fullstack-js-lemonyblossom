@@ -13,8 +13,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /*   background: linear-gradient(180deg, #ffdbb2 0%, #f6b89e 60%, #cda5eb 100%);
  */
-  background: linear-gradient(180deg, #ffd3b2 0%, #ffb99b 60%, #ae6c4f 100%);
-
+  /*   background: linear-gradient(180deg, #ffd3b2 0%, #ffb99b 60%, #ae6c4f 100%);
+ */
   background-attachment: fixed;
 
 }

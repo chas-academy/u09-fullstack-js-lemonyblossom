@@ -51,7 +51,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App fixed inset-0 mx-auto flex items-start justify-center md:max-w-[600px] lg:max-w-[1200px] w-screen h-screen font-sans bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 overflow-hidden overflow-y-auto">
+      <div className="App fixed inset-0 mx-auto p-2 flex items-start justify-center md:max-w-[600px] lg:max-w-[1200px] w-screen h-screen font-sans bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 overflow-hidden overflow-y-auto">
 
         <Routes>
 

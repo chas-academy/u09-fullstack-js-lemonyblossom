@@ -81,7 +81,7 @@ const Logs = () => {
         <div className="logs-list w-full max-w-3xl space-y-6">
           {Object.keys(groupedLogs).map(date => (
             <div key={date} className="log-group mb-8">
-              <h3 className="log-date-header text-2xl font-semibold mb-6 text-gray-200">{date}</h3>
+              <h3 className="log-date-header text-l italic font-semibold  mb-6 pl-2 text-white">{date}</h3>
               {groupedLogs[date].map((log, index) => (
                 <div
                   key={log._id}

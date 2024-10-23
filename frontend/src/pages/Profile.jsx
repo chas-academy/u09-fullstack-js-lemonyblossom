@@ -59,7 +59,7 @@ const Profile = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen max-w-[600px] min-h-screen bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 text-white py-10 px-4">
+    <div className="flex flex-col items-center justify-center w-screen md:max-w-[600px] lg:[1200px] min-h-screen bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 text-white py-10 px-4">
       <h2 className="text-4xl font-bold mb-6">Profile</h2>
 
       <div className="bg-white/80 text-gray-900 rounded-lg shadow-lg p-6 mb-8 w-full max-w-lg mx-auto">

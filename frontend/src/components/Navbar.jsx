@@ -25,7 +25,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="navbar w-full max-w-[600px] bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 shadow-lg fixed bottom-0 z-10 text-white">
+    <nav className="navbar w-screen md:max-w-[600px] lg:[1200px] bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 shadow-lg fixed bottom-0 z-10 text-white">
       <div className="max-w-[600px] mx-auto flex justify-around py-4 text-white text-sm md:text-base">
         <Link
           to="/logs"

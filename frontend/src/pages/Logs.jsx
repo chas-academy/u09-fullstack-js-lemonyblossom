@@ -74,7 +74,7 @@ const Logs = () => {
 
   return (
     <>
-      <div className="logs-container flex flex-col h-screen text-white">
+      <div className="logs-container flex flex-col h-screen w-screen md:max-w-[600px] lg:[1200px] text-white scrollbar-none">
         <UsernameDisplay />
 
         {/* Logs grouped by date */}

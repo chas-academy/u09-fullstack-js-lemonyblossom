@@ -45,10 +45,10 @@ const NewLogForm = () => {
    };
 
    return (
-      <div className="flex justify-center items-center h-screen md:max-h-[1200px] ">
+      <div className="flex justify-center w-screen md:max-w-[600px] lg:[1200px] items-center h-screen md:max-h-[1200px] ">
          <form
             onSubmit={handleSubmit}
-            className="h-screen w-screen max-w-[600px] flex flex-col items-center relative"
+            className="h-screen w-screen md:max-w-[600px] flex flex-col items-center relative"
          >
             {/* label positioning */}
             {shouldRender && (
@@ -120,7 +120,7 @@ const NewLogForm = () => {
             )}
 
             {/* Navigation Buttons */}
-            <div className="fixed bottom-10 w-full flex justify-between px-24">
+            <div className="w-screen md:max-w-[600px] lg:[1200px] flex justify-between px-24">
                {step === 1 && (
                   <>
                      <button

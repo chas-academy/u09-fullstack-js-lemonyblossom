@@ -43,7 +43,7 @@ const LogForm = ({ log, onSave, onCancel }) => {
   };
 
   return (
-    <div className="log-container flex flex-col items-center max-w-[600px] w-[100%] max-h-full p-6 rounded-lg text-black ">
+    <div className="log-container flex flex-col items-center md:max-w-[600px] lg:[1200px] w-screen max-h-full p-6 rounded-lg text-black ">
       {/* Exit button */}
       {onCancel && (
         <button

@@ -1,6 +1,6 @@
 {
-  "short_name": "MoodTracker",
-  "name": "MoodTracker",
+  "short_name": "FeelState",
+  "name": "FeelState",
   "icons": [
     {
       "src": "favicon.ico",

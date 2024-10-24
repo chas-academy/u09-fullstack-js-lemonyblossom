@@ -78,21 +78,21 @@ const RangeChart = () => {
         {
           label: 'Min Mood',
           data: minMoodData,
-          borderColor: 'rgba(0, 191, 255, 1)', // Bright cyan blue for good contrast
-          backgroundColor: 'rgba(0, 191, 255, 0.2)', // Light translucent cyan fill
+          borderColor: 'rgba(0, 191, 255, 1)', // cyan
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
           fill: 'origin',
           borderWidth: 2,
-          pointRadius: 4,
+          pointRadius: 0,
           tension: 0.4,
         },
         {
           label: 'Max Mood',
           data: maxMoodData,
-          borderColor: 'rgba(255, 165, 0, 1)', // Bright orange for good contrast
-          backgroundColor: 'rgba(255, 165, 0, 0.2)', // Light translucent orange fill
+          borderColor: 'rgba(255, 165, 0, 1)', // orange
+          backgroundColor: 'rgba(255, 165, 0)',
           fill: '-1',
           borderWidth: 2,
-          pointRadius: 4,
+          pointRadius: 0,
           tension: 0.4,
         },
       ],

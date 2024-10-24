@@ -26,7 +26,7 @@ const LandingPage = () => {
                      className="w-96 h-64 object-cover rounded-xl shadow-lg transform transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-2xl"
                   />
                   {/* Overlay effect */}
-                  <div className="absolute inset-0 bg-black bg-opacity-30 rounded-xl opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-white bg-opacity-30 rounded-xl opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
                </div>
             </Link>
             <p className="text-gray-300 text-lg animate-fadeInUp opacity-0 animation-delay-3">

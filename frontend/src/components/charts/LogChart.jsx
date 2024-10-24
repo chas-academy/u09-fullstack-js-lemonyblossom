@@ -84,7 +84,7 @@ const LogChart = () => {
   const chartData = prepareData();
 
   return (
-    <div className="w-full md:w-3/4 lg:w-3/5">
+    <div className=" md:max-w-3/4 lg:max-w-3/5">
       <div className="mx-auto max-w-full h-full">
         <h2 className="text-xl text-center mb-4">Sleep and Mood Data</h2>
         <Line

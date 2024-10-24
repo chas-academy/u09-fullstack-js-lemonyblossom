@@ -21,7 +21,7 @@ const LandingPage = () => {
             <Link to="/tools">
                <div className="relative group">
                   <img
-                     src="https://via.placeholder.com/400x300" // Replace with an actual image URL
+                     src="https://www.livehappycounselling.com/uploads/6/2/7/8/62787933/mental-aptitude-1_orig.png"
                      alt="Explore Tools"
                      className="w-96 h-64 object-cover rounded-xl shadow-lg transform transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-2xl"
                   />

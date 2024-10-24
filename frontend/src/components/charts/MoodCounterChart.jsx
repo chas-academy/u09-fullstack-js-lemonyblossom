@@ -77,12 +77,12 @@ const MoodCounterChart = () => {
           options={{
             responsive: true,
             maintainAspectRatio: true,
+            aspectRatio: 2,
+            rotation: -90,
+            circumference: 180,
             plugins: {
               legend: {
                 position: 'top',
-                labels: {
-                  color: '#ffffff',
-                },
               },
               tooltip: {
                 callbacks: {

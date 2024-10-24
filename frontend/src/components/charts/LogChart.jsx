@@ -60,24 +60,24 @@ const LogChart = () => {
         {
           label: 'Mood',
           data: moodData,
-          borderColor: '#7f9cf5', // Light Indigo
-          backgroundColor: 'rgba(127, 156, 245, 0.4)', // Light Indigo (transparent)
+          borderColor: 'white',
+          backgroundColor: 'rgba(255, 255, 255, 0.4)',
           yAxisID: 'y1',
-          borderWidth: 2,
-          pointRadius: 4,
-          pointBackgroundColor: '#4f46e5', // Indigo for points
-          tension: 0.3,
+          borderWidth: 1,
+          pointRadius: 2,
+          tension: 0.2,
+
         },
         {
           label: 'Sleep Hours',
           data: sleepData,
-          borderColor: '#5a67d8', // Darker Indigo
-          backgroundColor: 'rgba(90, 103, 216, 0.4)', // Darker Indigo (transparent)
+          borderColor: 'rgba(50, 50, 50, 1)',
+          backgroundColor: 'rgba(50, 50, 50, 0.4)',
           yAxisID: 'y2',
-          borderWidth: 2,
-          pointRadius: 4,
-          pointBackgroundColor: '#6b46c1', // Purple for points
-          tension: 0.3,
+          borderWidth: 1,
+          pointRadius: 2,
+          tension: 0.2,
+
         },
       ],
     };
@@ -88,76 +88,33 @@ const LogChart = () => {
   return (
     <div className="w-full md:w-3/4 lg:w-3/5">
       <div className="mx-auto max-w-full h-full">
-        <h2 className="text-xl text-center mb-4 text-white">Sleep and Mood Data</h2> {/* Updated text color */}
+        <h2 className="text-xl text-center mb-4">Sleep and Mood Data</h2>
         <Line
           ref={chartRef}
           data={chartData}
           options={{
-            maintainAspectRatio: false,
             scales: {
               x: {
                 type: 'category',
-                ticks: {
-                  color: '#e0e7ff', // Light text color
-                  font: {
-                    family: 'sans-serif',
-                  },
-                },
                 title: {
                   display: true,
                   text: 'Date',
-                  color: '#c7d2fe',
-                  font: {
-                    size: 14,
-                    weight: 'bold',
-                    family: 'sans-serif',
-                  },
-                },
-                grid: {
-                  color: 'rgba(255, 255, 255, 0.1)', // Subtle grid lines
                 },
               },
               y1: {
                 type: 'linear',
                 position: 'left',
-                ticks: {
-                  color: '#e0e7ff',
-                  font: {
-                    family: 'sans-serif',
-                  },
-                },
                 title: {
                   display: true,
                   text: 'Mood (1-5)',
-                  color: '#c7d2fe',
-                  font: {
-                    size: 14,
-                    weight: 'bold',
-                    family: 'sans-serif',
-                  },
-                },
-                grid: {
-                  color: 'rgba(255, 255, 255, 0.1)', // Subtle grid lines
                 },
               },
               y2: {
                 type: 'linear',
                 position: 'right',
-                ticks: {
-                  color: '#e0e7ff',
-                  font: {
-                    family: 'sans-serif',
-                  },
-                },
                 title: {
                   display: true,
                   text: 'Sleep Hours',
-                  color: '#c7d2fe',
-                  font: {
-                    size: 14,
-                    weight: 'bold',
-                    family: 'sans-serif',
-                  },
                 },
                 grid: {
                   drawOnChartArea: false,
@@ -167,12 +124,7 @@ const LogChart = () => {
             plugins: {
               legend: {
                 display: true,
-                labels: {
-                  color: '#e0e7ff', // Light legend text
-                  font: {
-                    family: 'sans-serif',
-                  },
-                },
+                position: 'top',
               },
               tooltip: {
                 callbacks: {

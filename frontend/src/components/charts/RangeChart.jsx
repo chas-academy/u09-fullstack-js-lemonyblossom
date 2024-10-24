@@ -115,6 +115,13 @@ const RangeChart = () => {
                 title: {
                   display: true,
                   text: 'Date',
+                  color: '#d4c2ff',
+                },
+                ticks: {
+                  color: '#d4c2ff',
+                },
+                grid: {
+                  color: '#8b75bf',
                 },
               },
               y: {
@@ -122,6 +129,13 @@ const RangeChart = () => {
                 title: {
                   display: true,
                   text: 'Mood',
+                  color: '#d4c2ff',
+                },
+                ticks: {
+                  color: '#d4c2ff',
+                },
+                grid: {
+                  color: '#8b75bf',
                 },
               },
             },
@@ -129,6 +143,9 @@ const RangeChart = () => {
               legend: {
                 display: true,
                 position: 'top',
+                labels: {
+                  color: '#ffffff',
+                },
               },
               tooltip: {
                 callbacks: {
@@ -140,12 +157,13 @@ const RangeChart = () => {
                     if (context.parsed.y !== null) {
                       label += context.parsed.y.toFixed(2);
                     }
-                    return label;
+                    return label; { }
                   },
                 },
               },
             },
-          }}
+          }
+          }
         />
       </div>
     </div>

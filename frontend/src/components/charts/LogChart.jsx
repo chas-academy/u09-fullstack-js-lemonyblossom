@@ -60,24 +60,22 @@ const LogChart = () => {
         {
           label: 'Mood',
           data: moodData,
-          borderColor: 'white',
-          backgroundColor: 'rgba(255, 255, 255, 0.4)',
+          borderColor: 'rgba(0, 191, 255, 1)', // Cyan
+          backgroundColor: 'rgba(0, 191, 255, 0.2)', // Cyan
           yAxisID: 'y1',
-          borderWidth: 1,
-          pointRadius: 2,
-          tension: 0.2,
-
+          borderWidth: 2,
+          pointRadius: 4,
+          tension: 0.4,
         },
         {
           label: 'Sleep Hours',
           data: sleepData,
-          borderColor: 'rgba(50, 50, 50, 1)',
-          backgroundColor: 'rgba(50, 50, 50, 0.4)',
+          borderColor: 'rgba(255, 165, 0, 1)', // Orange
+          backgroundColor: 'rgba(255, 165, 0, 0.2)', // Orange
           yAxisID: 'y2',
-          borderWidth: 1,
-          pointRadius: 2,
-          tension: 0.2,
-
+          borderWidth: 2,
+          pointRadius: 4,
+          tension: 0.4,
         },
       ],
     };
@@ -99,6 +97,13 @@ const LogChart = () => {
                 title: {
                   display: true,
                   text: 'Date',
+                  color: '#f0e68c',
+                },
+                ticks: {
+                  color: '#f0e68c',
+                },
+                grid: {
+                  color: 'rgba(240, 230, 140, 0.3)',
                 },
               },
               y1: {
@@ -107,6 +112,13 @@ const LogChart = () => {
                 title: {
                   display: true,
                   text: 'Mood (1-5)',
+                  color: '#f0e68c',
+                },
+                ticks: {
+                  color: '#f0e68c',
+                },
+                grid: {
+                  color: 'rgba(240, 230, 140, 0.3)',
                 },
               },
               y2: {
@@ -115,6 +127,10 @@ const LogChart = () => {
                 title: {
                   display: true,
                   text: 'Sleep Hours',
+                  color: '#f0e68c',
+                },
+                ticks: {
+                  color: '#f0e68c',
                 },
                 grid: {
                   drawOnChartArea: false,
@@ -125,6 +141,9 @@ const LogChart = () => {
               legend: {
                 display: true,
                 position: 'top',
+                labels: {
+                  color: '#ffffff',
+                },
               },
               tooltip: {
                 callbacks: {

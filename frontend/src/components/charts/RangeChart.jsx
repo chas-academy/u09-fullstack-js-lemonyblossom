@@ -88,8 +88,8 @@ const RangeChart = () => {
         {
           label: 'Max Mood',
           data: maxMoodData,
-          borderColor: 'rgba(255, 165, 0, 1)', // orange
-          backgroundColor: 'rgba(255, 165, 0)',
+          borderColor: 'rgba(0, 191, 255, 1)', // orange
+          backgroundColor: 'rgba(255, 165, 0, 1))',
           fill: '-1',
           borderWidth: 2,
           pointRadius: 0,

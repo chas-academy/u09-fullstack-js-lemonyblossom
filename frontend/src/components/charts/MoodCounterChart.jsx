@@ -47,23 +47,23 @@ const MoodCounterChart = () => {
     fetchData();
   }, []);
 
+  const backgroundColors = [
+    'rgba(255, 165, 0, 0.7)',  // orange
+    'rgba(0, 191, 255, 0.7)',  // cyan
+    'rgba(128, 0, 128, 0.7)',  // purple
+    'rgba(255, 105, 180, 0.7)', // hot pink
+    'rgba(75, 0, 130, 0.7)',    // indigo
+  ];
+
   const chartData = {
     labels: Object.keys(moodCounts).map(mood => `Mood ${mood}`),
     datasets: [
       {
         label: 'Mood Count',
         data: Object.values(moodCounts),
-        backgroundColor: [
-          'rgba(250, 250, 250, 0.8)',
-          'rgba(200, 200, 200, 0.8)',
-          'rgba(150, 150, 150, 0.8)',
-          'rgba(100, 100, 100, 0.8)',
-          'rgba(50 , 50, 50, 0.8)',
-        ],
-        borderColor: [
-          'rgba(255, 255, 255, 1)',
-        ],
-        borderWidth: 1,
+        backgroundColor: backgroundColors.slice(0, Object.keys(moodCounts).length),
+        borderColor: 'rgba(255, 255, 255, 1)',
+        borderWidth: 2,
       },
     ],
   };
@@ -77,12 +77,12 @@ const MoodCounterChart = () => {
           options={{
             responsive: true,
             maintainAspectRatio: true,
-            aspectRatio: 2,
-            rotation: -90,
-            circumference: 180,
             plugins: {
               legend: {
                 position: 'top',
+                labels: {
+                  color: '#ffffff',
+                },
               },
               tooltip: {
                 callbacks: {

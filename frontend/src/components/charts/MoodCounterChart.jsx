@@ -69,7 +69,7 @@ const MoodCounterChart = () => {
   };
 
   return (
-    <div className="w-full md:w-3/4 lg:w-3/5 mx-auto">
+    <div className="w-full md:w-3/4 lg:w-3/5 mx-auto max-width-[600px]">
       <div className="max-w-full h-full">
         <h2 className="text-xl text-center mb-4">Monthly Moods</h2>
         <Doughnut

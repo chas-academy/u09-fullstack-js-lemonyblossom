@@ -18,6 +18,7 @@ import loaderIcon from '../src/loading.png';
 function App() {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -28,18 +29,28 @@ function App() {
             {
               headers: { Authorization: `Bearer ${token}` },
             });
+
           if (response.ok) {
             setIsAuthenticated(true);
+
+            const decodedToken = JSON.parse(atob(token.split('.')[1]));
+            setUserRole(decodedToken.role);
+
           } else {
             localStorage.removeItem('token');
             setIsAuthenticated(false);
+            setUserRole(null);
           }
+
         } catch (error) {
           localStorage.removeItem('token');
           setIsAuthenticated(false);
+          setUserRole(null);
         }
+
       } else {
         setIsAuthenticated(false);
+        setUserRole(null);
       }
       setLoading(false);
     };
@@ -49,7 +60,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="LOADER flex items-center justify-center h-screen ">
+      <div className="LOADER fixed inset-0 mx-auto p-2 flex items-start justify-center md:max-w-[600px] lg:max-w-[1200px] w-screen h-screen font-sans bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-500 overflow-hidden overflow-y-auto">
         <div className="relative flex items-center justify-center w-36 h-36 rounded-full animate-spinSlow">
           <img src={loaderIcon} alt="Loading..." className="absolute w-24 h-24" /> {/* Customize size */}
         </div>
@@ -81,7 +92,7 @@ function App() {
 
 
         </Routes>
-        <Navbar />
+        <Navbar userRole={userRole} />
 
       </div>
 

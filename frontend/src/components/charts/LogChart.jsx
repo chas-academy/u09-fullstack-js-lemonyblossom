@@ -60,23 +60,23 @@ const LogChart = () => {
         {
           label: 'Mood',
           data: moodData,
-          borderColor: 'rgba(255, 255, 255, 1)', // White line for mood
-          backgroundColor: 'rgba(255, 255, 255, 0.4)', // Slight transparency for fill
+          borderColor: '#7f9cf5', // Light Indigo
+          backgroundColor: 'rgba(127, 156, 245, 0.4)', // Light Indigo (transparent)
           yAxisID: 'y1',
           borderWidth: 2,
           pointRadius: 4,
-          pointBackgroundColor: '#ffffff', // White points
+          pointBackgroundColor: '#4f46e5', // Indigo for points
           tension: 0.3,
         },
         {
           label: 'Sleep Hours',
           data: sleepData,
-          borderColor: 'rgba(0, 0, 0, 0.8)', // Darker line for sleep
-          backgroundColor: 'rgba(0, 0, 0, 0.2)', // Transparent dark fill
+          borderColor: '#5a67d8', // Darker Indigo
+          backgroundColor: 'rgba(90, 103, 216, 0.4)', // Darker Indigo (transparent)
           yAxisID: 'y2',
           borderWidth: 2,
           pointRadius: 4,
-          pointBackgroundColor: '#000000', // Black points
+          pointBackgroundColor: '#6b46c1', // Purple for points
           tension: 0.3,
         },
       ],
@@ -86,47 +86,78 @@ const LogChart = () => {
   const chartData = prepareData();
 
   return (
-    <div className="w-full md:w-3/4 lg:w-3/5 p-4 bg-white/10 rounded-lg shadow-lg border border-white/10">
+    <div className="w-full md:w-3/4 lg:w-3/5">
       <div className="mx-auto max-w-full h-full">
-        <h2 className="text-2xl text-center mb-6 text-white font-semibold">Sleep and Mood Data</h2>
+        <h2 className="text-xl text-center mb-4 text-white">Sleep and Mood Data</h2> {/* Updated text color */}
         <Line
           ref={chartRef}
           data={chartData}
           options={{
+            maintainAspectRatio: false,
             scales: {
               x: {
                 type: 'category',
-                ticks: { color: '#ffffff' }, // White labels on x-axis
+                ticks: {
+                  color: '#e0e7ff', // Light text color
+                  font: {
+                    family: 'sans-serif',
+                  },
+                },
                 title: {
                   display: true,
                   text: 'Date',
-                  color: '#ffffff',
+                  color: '#c7d2fe',
+                  font: {
+                    size: 14,
+                    weight: 'bold',
+                    family: 'sans-serif',
+                  },
                 },
                 grid: {
-                  color: 'rgba(255, 255, 255, 0.2)', // Light grid lines
+                  color: 'rgba(255, 255, 255, 0.1)', // Subtle grid lines
                 },
               },
               y1: {
                 type: 'linear',
                 position: 'left',
-                ticks: { color: '#ffffff' }, // White labels on y1-axis
+                ticks: {
+                  color: '#e0e7ff',
+                  font: {
+                    family: 'sans-serif',
+                  },
+                },
                 title: {
                   display: true,
                   text: 'Mood (1-5)',
-                  color: '#ffffff',
+                  color: '#c7d2fe',
+                  font: {
+                    size: 14,
+                    weight: 'bold',
+                    family: 'sans-serif',
+                  },
                 },
                 grid: {
-                  color: 'rgba(255, 255, 255, 0.2)',
+                  color: 'rgba(255, 255, 255, 0.1)', // Subtle grid lines
                 },
               },
               y2: {
                 type: 'linear',
                 position: 'right',
-                ticks: { color: '#ffffff' }, // White labels on y2-axis
+                ticks: {
+                  color: '#e0e7ff',
+                  font: {
+                    family: 'sans-serif',
+                  },
+                },
                 title: {
                   display: true,
                   text: 'Sleep Hours',
-                  color: '#ffffff',
+                  color: '#c7d2fe',
+                  font: {
+                    size: 14,
+                    weight: 'bold',
+                    family: 'sans-serif',
+                  },
                 },
                 grid: {
                   drawOnChartArea: false,
@@ -136,16 +167,26 @@ const LogChart = () => {
             plugins: {
               legend: {
                 display: true,
-                position: 'top',
                 labels: {
-                  color: '#ffffff', // White legend text
+                  color: '#e0e7ff', // Light legend text
+                  font: {
+                    family: 'sans-serif',
+                  },
                 },
               },
               tooltip: {
-                backgroundColor: 'rgba(0, 0, 0, 0.7)', // Dark tooltip background
-                bodyColor: '#ffffff', // White tooltip text
-                borderColor: '#ffffff', // Tooltip border
-                borderWidth: 1,
+                callbacks: {
+                  label: function (context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                      label += context.parsed.y.toFixed(2);
+                    }
+                    return label;
+                  },
+                },
               },
             },
           }}

@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import loaderIcon from '../../src/loading.png';
-
 
 const LandingPage = () => {
    return (
+
       <div className="flex flex-col items-center justify-center h-screen text-white py-10 px-4">
+
          {/* Title with entrance animation */}
          <h1 className="text-6xl font-bold mb-8 animate-fadeInUp opacity-0 animation-delay-1">
             Feelstate

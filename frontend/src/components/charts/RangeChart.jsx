@@ -76,23 +76,23 @@ const RangeChart = () => {
       labels,
       datasets: [
         {
-          label: 'Mood Range',
+          label: 'Min Mood',
           data: minMoodData,
-          borderColor: 'rgb(255, 255, 255)',
-          backgroundColor: 'rgb(255, 255, 255, 0.01)',
+          borderColor: 'rgba(0, 191, 255, 1)', // Bright cyan blue for good contrast
+          backgroundColor: 'rgba(0, 191, 255, 0.2)', // Light translucent cyan fill
           fill: 'origin',
-          borderWidth: 1,
-          pointRadius: 0,
+          borderWidth: 2,
+          pointRadius: 4,
           tension: 0.4,
         },
         {
-          label: '',
+          label: 'Max Mood',
           data: maxMoodData,
-          borderColor: 'rgb(255, 255, 255)',
-          backgroundColor: 'rgb(255, 255, 255)',
+          borderColor: 'rgba(255, 165, 0, 1)', // Bright orange for good contrast
+          backgroundColor: 'rgba(255, 165, 0, 0.2)', // Light translucent orange fill
           fill: '-1',
-          borderWidth: 1,
-          pointRadius: 0,
+          borderWidth: 2,
+          pointRadius: 4,
           tension: 0.4,
         },
       ],
@@ -115,13 +115,13 @@ const RangeChart = () => {
                 title: {
                   display: true,
                   text: 'Date',
-                  color: '#d4c2ff',
+                  color: '#f0e68c',  // Light goldenrod for high contrast
                 },
                 ticks: {
-                  color: '#d4c2ff',
+                  color: '#f0e68c',  // Same color for ticks
                 },
                 grid: {
-                  color: '#8b75bf',
+                  color: 'rgba(240, 230, 140, 0.3)',  // Light goldenrod grid with low opacity
                 },
               },
               y: {
@@ -129,13 +129,13 @@ const RangeChart = () => {
                 title: {
                   display: true,
                   text: 'Mood',
-                  color: '#d4c2ff',
+                  color: '#f0e68c',  // Same light goldenrod for y-axis title
                 },
                 ticks: {
-                  color: '#d4c2ff',
+                  color: '#f0e68c',  // Same for ticks
                 },
                 grid: {
-                  color: '#8b75bf',
+                  color: 'rgba(240, 230, 140, 0.3)',  // Same light goldenrod for grid
                 },
               },
             },
@@ -144,7 +144,7 @@ const RangeChart = () => {
                 display: true,
                 position: 'top',
                 labels: {
-                  color: '#ffffff',
+                  color: '#ffffff',  // Bright white for high contrast against dark background
                 },
               },
               tooltip: {
@@ -157,13 +157,12 @@ const RangeChart = () => {
                     if (context.parsed.y !== null) {
                       label += context.parsed.y.toFixed(2);
                     }
-                    return label; { }
+                    return label;
                   },
                 },
               },
             },
-          }
-          }
+          }}
         />
       </div>
     </div>
